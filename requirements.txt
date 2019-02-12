@@ -1,0 +1,9 @@
+flask
+flask_bootstrap
+flask_wtf
+wtforms
+flask_sqlalchemy
+flask_user
+flask_babelex
+flask_nav
+flask_uploads

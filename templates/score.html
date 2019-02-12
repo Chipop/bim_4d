@@ -1,0 +1,86 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+<meta charset="UTF-8" />
+<meta content="Introduction of 4D BIM." name="description">
+<meta content="4D BIM, BIM, 4D" name="keywords">
+{{ super() }}
+{% endblock %}
+
+{% block title %}
+Score Project
+{% endblock %}
+
+{% block navbar %}
+{{ nav.mynavbar.render(renderer='inverted') }}
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Projects</h1>
+            <div class="list-group">
+                {% for project in projects %}
+                    {% if project['id']==project_id %}
+                        <a href="/score/{{project['id']}}" class="list-group-item active">{{project['title']}}</a>
+                    {% else %}
+                        <a href="/score/{{project['id']}}" class="list-group-item">{{project['title']}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if images is not none %}
+                <h3>Images</h3>
+                <div class="list-group">
+                    {% for image in images %}
+                        <a class="btn btn-info" href="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">{{image}}</a>
+                        <img style="max-width:200pt; max-height: 200pt;" src="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if files is not none %}
+                <h3>Files</h3>
+                <div class="list-group">
+                    {% for file in files %}
+                        <a class="btn btn-info" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if project_id is not none %}
+            <a href="https://www.surveymonkey.com/r/2XG8VNJ">4D BIM Professional's opinions of current & proposed methods of the 4D BIM Decision Support System - Multiple choice</a>
+            <br>
+            <br>
+            <a href="https://www.surveymonkey.com/r/V3BT3FC">4D BIM Professional opinions of current & proposed methods of the 4D BIM Decision Support System - Questions</a>
+            <br>
+            <br>
+            <a href="https://www.surveymonkey.com/r/2YKV8RD">4D BIM Professional's opinions of current & proposed methods of the 4D BIM Decision Support System - Multiple choice</a>
+            <br>
+            <br>
+            <a href="https://www.surveymonkey.com/r/2D6LL7G">4D BIM Professional's opinions of the influence of 4D BIM on improving construction management. - Questions</a>
+            <br>
+            <br>
+            {% endif %}
+        </div>
+        <div class="col-sm-6">
+        {% if project_id is none %}
+            <div class="alert alert-warning" role="alert">Please select project to score</div>
+        {% else %}
+            {% if info is not none %}
+                <div class="alert alert-success" role="alert">{{ info }}</div>
+            {% endif %}
+            <form method="POST" action="/score/{{project_id}}" autocomplete="off" enctype="multipart/form-data">
+                <dl>
+                    {{ wtf.quick_form(form) }}
+                    <input class="btn btn-primary" type="submit" value="Update">
+                </dl>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

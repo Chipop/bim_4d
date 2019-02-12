@@ -1,0 +1,41 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+Professional Offering a 4D BIM Recommendation
+{% endblock %}
+
+{% block head %}
+<meta charset="UTF-8" />
+<meta content="Professional Offering a 4D BIM Recommendation." name="description">
+<meta content="4D BIM, BIM, 4D" name="keywords">
+{{ super() }}
+{% endblock %}
+
+{% block navbar %}
+{{ nav.mynavbar.render(renderer='inverted') }}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<div class="container">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">PROJECT TITLE & ORGANISATION</th>
+        <th scope="col">DATE OF PROJECT COMPLETION</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for project in projects %}
+    <tr>
+        <td><a href="{{ project['organisation_url'] }}">{{ project['title'] }}</a></td>
+        <td><a href="{{ project['organisation_url'] }}">{{ project['date_of_project'] }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{% endblock %}
