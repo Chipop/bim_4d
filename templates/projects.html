@@ -28,8 +28,8 @@ Professional Offering a 4D BIM Recommendation
     <tbody>
     {% for project in projects %}
     <tr>
-        <td><a href="{{ project['organisation_url'] }}">{{ project['title'] }}</a></td>
-        <td><a href="{{ project['organisation_url'] }}">{{ project['date_of_project'] }}</a></td>
+        <td><a href="{{ project['organisation_url'] }}" target="_blank">{{ project['title'] }}</a></td>
+        <td><a href="{{ project['organisation_url'] }}" target="_blank">{{ project['date_of_project'] }}</a></td>
     </tr>
     {% endfor %}
     </tbody>

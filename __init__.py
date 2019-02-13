@@ -361,7 +361,7 @@ def add():
             'files': []
         }
         save_projects()
-        send_email("4dbimdecision@gmail.com", projects[max_id+1])
+        send_email("4dbimdecisions@gmail.com", projects[max_id+1])
 
         form.reset()
         return render_template('add.html',
@@ -837,7 +837,7 @@ def send_email(receiver_email, project):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "damien.kavanagh.aec.services@gmail.com"  # Enter your address
-    password = "11Munster"
+    password = "111Munster!!!"
 
     message = """Project Title & Organisation: %s
 Organisation URL: %s
