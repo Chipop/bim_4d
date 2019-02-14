@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+Professional Offering a 4D BIM Recommendation
+{% endblock %}
+
+{% block head %}
+<meta charset="UTF-8" />
+<meta content="Professional Offering a 4D BIM Recommendation." name="description">
+<meta content="4D BIM, BIM, 4D" name="keywords">
+{{ super() }}
+{% endblock %}
+
+{% block navbar %}
+{{ nav.mynavbar.render(renderer='inverted') }}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+<div class="container">
+    <div class="wrap">
+        <div class="logo">
+            <h1>404</h1>
+            <p>Error occurred! - Page not Found</p>
+            <div class="sub">
+                <p><a href="{{ url_for('index') }}">Back</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{% endblock %}

@@ -290,47 +290,47 @@ def index_1():
     return render_template('index_1.html')
 
 
-@app.route('/introduction')
+@app.route('/website-design/introduction')
 def introduction():
     return render_template('introduction.html')
 
 
-@app.route('/instruction')
+@app.route('/website-design/design')
 def instruction():
     return render_template('instruction.html')
 
 
-@app.route('/management')
+@app.route('/successful-construction-management/improving-construction-management-with-4d-bim')
 def management():
     return render_template('management.html')
 
 
-@app.route('/bim_tool')
+@app.route('/best-practice-4d-bim/best-practice-evaluation')
 def bim_tool():
     return render_template('bim_tool.html')
 
 
-@app.route('/explained')
+@app.route('/best-practice-4d-bim/explained')
 def explained():
     return render_template('explained.html')
 
 
-@app.route('/constraints')
+@app.route('/best-practice-4d-bim/project-constraints')
 def constraints():
     return render_template('constraints.html')
 
 
-@app.route('/attributes')
+@app.route('/best-practice-4d-bim/4d-bim-attributes')
 def attributes():
     return render_template('attributes.html')
 
 
-@app.route('/planned_output')
+@app.route('/best-practice-4d-bim/planned-outputs')
 def planned_output():
     return render_template('planned_output.html')
 
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/decision-support-system/add', methods=['GET', 'POST'])
 def add():
     form = ProjectForm()
     load_projects()
@@ -381,7 +381,7 @@ files = UploadSet('files', TEXT + DOCUMENTS + DATA + tuple('csv ini json plist x
 configure_uploads(app, [images, files])
 
 
-@app.route('/score/<int:project_id>', methods=['GET', 'POST'])
+@app.route('/decision-support-system/score-projects/<int:project_id>', methods=['GET', 'POST'])
 @roles_required('Expert')
 def score(project_id):
     if project_id == 0:
@@ -502,7 +502,7 @@ def score(project_id):
                            project_id=project_id)
 
 
-@app.route('/recommend', methods=['GET', 'POST'])
+@app.route('/decision-support-system/recommendation', methods=['GET', 'POST'])
 def recommend():
     form = RecommendForm()
     load_projects()
@@ -538,7 +538,7 @@ def recommend():
                            software_names=software_names)
 
 
-@app.route('/accept/<int:project_id>', methods=['GET', 'POST'])
+@app.route('/decision-support-system/manage-projects/<int:project_id>', methods=['GET', 'POST'])
 @roles_required('Admin')
 def accept(project_id):
     if project_id == 0:
@@ -640,7 +640,7 @@ def accept(project_id):
                            history=True if project_id is None else projects[project_id]['history'])
 
 
-@app.route('/accept/accept/<int:project_id>')
+@app.route('/decision-support-system/manage-projects/accept/<int:project_id>')
 @roles_required('Admin')
 def accept_project(project_id):
     load_projects()
@@ -650,7 +650,7 @@ def accept_project(project_id):
     return redirect(url_for('accept', project_id=0))
 
 
-@app.route('/accept/addhistory/<int:project_id>')
+@app.route('/decision-support-system/manage-projects/add-history/<int:project_id>')
 @roles_required('Admin')
 def add_history_project(project_id):
     load_projects()
@@ -660,7 +660,7 @@ def add_history_project(project_id):
     return redirect(url_for('accept', project_id=0))
 
 
-@app.route('/accept/removehistory/<int:project_id>')
+@app.route('/decision-support-system/manage-projects/remove-history/<int:project_id>')
 @roles_required('Admin')
 def remove_history_project(project_id):
     load_projects()
@@ -670,7 +670,7 @@ def remove_history_project(project_id):
     return redirect(url_for('accept', project_id=0))
 
 
-@app.route('/accept/del/<int:project_id>')
+@app.route('/decision-support-system/manage-projects/del/<int:project_id>')
 @roles_required('Admin')
 def delete_project(project_id):
     load_projects()
@@ -680,7 +680,7 @@ def delete_project(project_id):
     return redirect(url_for('accept', project_id=0))
 
 
-@app.route('/useradmin/<int:user_id>', methods=['GET', 'POST'])
+@app.route('/decision-support-system/manage-users/<int:user_id>', methods=['GET', 'POST'])
 @roles_required('Admin')
 def useradmin(user_id):
     if user_id == 0:
@@ -719,7 +719,7 @@ def useradmin(user_id):
                            user_id=user_id)
 
 
-@app.route('/useradmin/add', methods=['POST'])
+@app.route('/decision-support-system/manage-users/add', methods=['POST'])
 @roles_required('Admin')
 def add_user():
     form = UserAdminForm()
@@ -742,7 +742,7 @@ def add_user():
     return redirect(url_for('useradmin', user_id=0))
 
 
-@app.route('/useradmin/del/<int:user_id>')
+@app.route('/decision-support-system/manage-users/del/<int:user_id>')
 @roles_required('Admin')
 def delete_user(user_id):
     user = User.query.get(user_id)
@@ -751,11 +751,16 @@ def delete_user(user_id):
     return redirect(url_for('useradmin', user_id=0))
 
 
-@app.route('/projects')
+@app.route('/list-of-4d-bim-professional-dss-users/professionals-offering-a-4d-bim-recommendation')
 def projects():
     load_projects()
     return render_template('projects.html',
                            projects=[x for x in projects.values() if x['scored']],)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
 
 
 nav = Nav()
@@ -871,4 +876,4 @@ E-mail: %s"""
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

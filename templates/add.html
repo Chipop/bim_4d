@@ -23,7 +23,7 @@ Add Project
 {% if info is not none %}
     <div class="alert alert-success" role="alert">{{ info }}</div>
 {% endif %}
-    <form method="POST" action="/add" autocomplete="off">
+    <form method="POST" action="" autocomplete="off">
         <dl>
             {{ wtf.quick_form(form) }}
             <input class="btn btn-primary btn-block" type="submit" value="Add">

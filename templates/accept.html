@@ -24,9 +24,9 @@ Manage Projects
             <div class="list-group">
                 {% for project in projects %}
                     {% if project['id']==project_id %}
-                        <a href="/accept/{{project['id']}}" class="list-group-item active">{{project['title']}}</a>
+                        <a href="{{ url_for('accept', project_id=project['id']) }}" class="list-group-item active">{{project['title']}}</a>
                     {% else %}
-                        <a href="/accept/{{project['id']}}" class="list-group-item">{{project['title']}}</a>
+                        <a href="{{ url_for('accept', project_id=project['id']) }}" class="list-group-item">{{project['title']}}</a>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -49,27 +49,27 @@ Manage Projects
             {% endif %}
         </div>
         <div class="col-sm-6">
-        {% if id is none %}
+        {% if project_id is none %}
             <div class="alert alert-warning" role="alert">Please select project to see details.</div>
         {% else %}
             {% if info is not none %}
                 <div class="alert alert-success" role="alert">{{ info }}</div>
             {% endif %}
-            <form method="POST" action="/accept/{{project_id}}" autocomplete="off">
+            <form method="POST" action="" autocomplete="off">
                 <dl>
                     {{ wtf.quick_form(form) }}
                     <input class="btn btn-primary" type="submit" value="Update">
                     {% if not accepted %}
-                    <a class="btn" href="/accept/accept/{{project_id}}">Accept</a>
+                    <a class="btn" href="{{ url_for('accept_project', project_id=project_id) }}">Accept</a>
                     {% else %}
                         {% if not history %}
-                        <a class="btn" href="/accept/addhistory/{{project_id}}">Move To History</a>
+                        <a class="btn" href="{{ url_for('add_history_project', project_id=project_id) }}">Move To History</a>
                         {% else %}
-                        <a class="btn" href="/accept/removehistory/{{project_id}}">Remove From History</a>
+                        <a class="btn" href="{{ url_for('remove_history_project', project_id=project_id) }}">Remove From History</a>
                         {% endif %}
                     {% endif %}
                     {% if not history %}
-                        <a class="btn" href="/accept/del/{{project_id}}">Delete</a>
+                        <a class="btn" href="{{ url_for('delete_project', project_id=project_id) }}">Delete</a>
                     {% endif %}
                 </dl>
             </form>
