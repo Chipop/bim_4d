@@ -330,7 +330,7 @@ def planned_output():
     return render_template('planned_output.html')
 
 
-@app.route('/decision-support-system/add', methods=['GET', 'POST'])
+@app.route('/decision-support-system/add-project', methods=['GET', 'POST'])
 def add():
     form = ProjectForm()
     load_projects()
