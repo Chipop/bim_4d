@@ -1,3 +1,9 @@
+@font-face {
+	font-family: 'CASTELAR';
+	src: url('fonts/CASTELAR.eot');
+	src: local('CASTELAR'), url('fonts/CASTELAR.woff') format('woff'), url('fonts/CASTELAR.ttf') format('truetype');
+}
+
 p {
     font-family: Calibri;
     font-size: 13.5pt;
@@ -25,7 +31,7 @@ li {
     color: gray();
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 30px;
+    font-size: 50px;
     text-shadow: 1px 1px 5px #000;
 }
 
@@ -42,8 +48,36 @@ li {
     text-align: center;
 }
 
+.bim-page-sub-title {
+    font-family: "CASTELAR", verdana, helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 18pt;
+    text-align: center;
+}
+
+.bim-page-mini-title {
+    font-size:14pt;
+    font-weight: bold;
+}
+
 .bim-page-img {
     width: 100%;
     height: auto;
     max-width: 400px;
+}
+
+.project-image-box {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+}
+
+.project-table-back-img {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    background-image: url('/static/img/clock.jpg');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: top;
 }

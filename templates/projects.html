@@ -17,12 +17,16 @@ Professional Offering a 4D BIM Recommendation
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<div class="container">
+<div class="container" style="position: relative;">
+    <div class="project-image-box" align="right">
+        <!-- stuff -->
+        <img src="{{ url_for('static', filename='img/clock.jpg') }}" width="50%"/>
+    </div>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col">PROJECT TITLE & ORGANISATION</th>
-        <th scope="col">DATE OF PROJECT COMPLETION</th>
+        <th scope="col" ><span class="bim-page-sub-title" style="font-size: 18px;">PROJECT TITLE & ORGANISATION</span></th>
+        <th scope="col"><span class="bim-page-sub-title" style="font-size: 18px;">DATE OF PROJECT COMPLETION</span></th>
     </tr>
     </thead>
     <tbody>
