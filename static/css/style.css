@@ -26,17 +26,16 @@ li {
 
 .bim-title {
     font-style: italic;
-    font-weight: bold;
+    font-weight: normal;
     background-color: rgba(255,255,255,0.3);
     color: gray();
     padding-left: 10px;
     padding-right: 10px;
     font-size: 50px;
-    text-shadow: 1px 1px 5px #000;
 }
 
 .bim-page-title {
-    font-weight: bolder;
+    font-weight: normal;
     padding-left: 10px;
     padding-right: 10px;
     border-style: solid;

@@ -783,7 +783,7 @@ def mynavbar():
                       View('Introduction', 'introduction'),
                       View('Design', 'instruction')),
              Subgroup('Construction Management',
-                      View('4D BIM & Value Added', 'management'),
+                      View('4D BIM Value Added', 'management'),
                       View('Risk Mitigation', 'risk_mitigation'),
                       View('Exemplar Aspects of Evaluation', 'exemplar_aspect')),
              Subgroup('Best Practice 4D BIM',
