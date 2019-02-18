@@ -4,6 +4,11 @@
 	src: local('CASTELAR'), url('fonts/CASTELAR.woff') format('woff'), url('fonts/CASTELAR.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: 'Century Gothic';
+	src: local('Century Gothic'), url('fonts/CenturyGothic.ttf') format('truetype');
+}
+
 p {
     font-family: Calibri;
     font-size: 13.5pt;
@@ -25,16 +30,17 @@ li {
 }
 
 .bim-title {
-    font-style: italic;
+    font-family: "Century Gothic", verdana, helvetica, sans-serif;
     font-weight: normal;
-    background-color: rgba(255,255,255,0.3);
-    color: gray();
+    background-color: black;
+    color: white;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 50px;
+    font-size: 22px;
 }
 
 .bim-page-title {
+    font-family: "Century Gothic", verdana, helvetica, sans-serif;
     font-weight: normal;
     padding-left: 10px;
     padding-right: 10px;
@@ -43,7 +49,7 @@ li {
     border-bottom-width: thick;
     border-right-width: thick;
     border-top-width: thin;
-    font-size: 22pt;
+    font-size: 17pt;
     text-align: center;
 }
 
