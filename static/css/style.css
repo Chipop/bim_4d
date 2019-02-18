@@ -32,8 +32,8 @@ li {
 .bim-title {
     font-family: "Century Gothic", verdana, helvetica, sans-serif;
     font-weight: normal;
-    background-color: black;
-    color: white;
+
+    color: black;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 22px;
