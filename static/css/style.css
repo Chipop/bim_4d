@@ -41,3 +41,9 @@ li {
     font-size: 22pt;
     text-align: center;
 }
+
+.bim-page-img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+}
