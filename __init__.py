@@ -285,9 +285,9 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/index_1')
-def index_1():
-    return render_template('index_1.html')
+#@app.route('/index_1')
+#def index_1():
+#    return render_template('index_1.html')
 
 
 @app.route('/website-design/introduction')
@@ -300,9 +300,19 @@ def instruction():
     return render_template('instruction.html')
 
 
-@app.route('/successful-construction-management/improving-construction-management-with-4d-bim')
+@app.route('/successful-construction-management/4d-bim-and-value-added')
 def management():
     return render_template('management.html')
+
+
+@app.route('/successful-construction-management/risk-mitigation')
+def risk_mitigation():
+    return render_template('risk_mitigation.html')
+
+
+@app.route('/successful-construction-management/exemplar-aspects-of-evaluation')
+def exemplar_aspect():
+    return render_template('exemplar_aspect.html')
 
 
 @app.route('/best-practice-4d-bim/best-practice-evaluation')
@@ -772,8 +782,10 @@ def mynavbar():
              Subgroup('Website Design',
                       View('Introduction', 'introduction'),
                       View('Design', 'instruction')),
-             Subgroup('Successful Construction Management',
-                      View('Improving Construction Management with 4D BIM', 'management')),
+             Subgroup('Construction Management',
+                      View('4D BIM & Value Added', 'management'),
+                      View('Risk Mitigation', 'risk_mitigation'),
+                      View('Exemplar Aspects of Evaluation', 'exemplar_aspect')),
              Subgroup('Best Practice 4D BIM',
                       View('Best Practice Evaluation', 'bim_tool'),
                       View('Explained', 'explained'),
@@ -816,8 +828,8 @@ def mynavbar():
         items.append(Subgroup('Log in',
                               View('Log in', 'user.login')))
 
-    items.append((Subgroup('List of 4D BIM Professional DSS Users',
-                           View('Professionals Offering a 4D BIM Recommendation', 'projects'))))
+    items.append((Subgroup('Professional DSS Users',
+                           View('Professional Recommendations', 'projects'))))
 
     return Navbar(*items)
 
