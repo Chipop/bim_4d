@@ -300,7 +300,7 @@ def instruction():
     return render_template('instruction.html')
 
 
-@app.route('/successful-construction-management/4d-bim-and-value-added')
+@app.route('/successful-construction-management/4d-bim-and-added-value')
 def management():
     return render_template('management.html')
 
@@ -783,7 +783,7 @@ def mynavbar():
                       View('Introduction', 'introduction'),
                       View('Design', 'instruction')),
              Subgroup('Construction Management',
-                      View('4D BIM Value Added', 'management'),
+                      View('4D BIM Added Value', 'management'),
                       View('Risk Mitigation', 'risk_mitigation'),
                       View('Exemplar Aspects of Evaluation', 'exemplar_aspect')),
              Subgroup('Best Practice 4D BIM',
