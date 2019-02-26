@@ -42,7 +42,7 @@ li {
     color: black;
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 20pt;
+    font-size: 25pt;
 }
 
 .bim-page-title {
@@ -55,7 +55,7 @@ li {
     border-bottom-width: thick;
     border-right-width: thick;
     border-top-width: thin;
-    font-size: 25pt;
+    font-size: 20pt;
     text-align: center;
 }
 
