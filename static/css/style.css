@@ -9,6 +9,12 @@
 	src: local('Century Gothic'), url('fonts/CenturyGothic.ttf') format('truetype');
 }
 
+#main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 p {
     font-family: Calibri;
     font-size: 13.5pt;
@@ -85,4 +91,28 @@ li {
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: top;
+}
+
+.mobile-version {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+
+    #main {
+        display: flex;
+        justify-content: center;
+        align-items: end;
+    }
+
+    .bim-title {
+        display: none;
+    }
+
+    .mobile-version {
+        display: block;
+    }
 }
