@@ -250,15 +250,20 @@ class ScoreForm(FlaskForm):
 
 
 class RecommendForm(FlaskForm):
-    cm_restriction1 = SelectField('Procurement', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
+    cm_restriction1 = SelectField('Sector Type', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
     cm_restriction2 = SelectField('Site Logistics', choices=[(0, 'Slightly Restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
-    cm_restriction3 = SelectField('Resource control', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')], coerce=int)
-    cm_restriction4 = SelectField('Bill of Quantities', choices=[(0, 'Precise'), (1, 'Narrow Margin'), (2, 'Standard Margin')], coerce=int)
-    cm_restriction5 = SelectField('Return on Investment', choices=[(0, 'Major Importance'), (1, 'Important'), (2, 'Not so Important')], coerce=int)
-    cm_restriction6 = SelectField('Business transparency', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')], coerce=int)
-    cm_restriction7 = SelectField('4D BIM knowledge', choices=[(0, 'High Level'), (1, 'Intermediate Level'), (2, 'Beginner Level')], coerce=int)
-    cm_restriction8 = SelectField('Stakeholder involvement', choices=[(0, 'Very Influencial'), (1, 'Influencial'), (2, 'Little Influencial')], coerce=int)
-    cm_restriction9 = SelectField('Resource planning', choices=[(0, 'Large amount of Resources'), (1, 'Moderate amount of Resources'), (2, 'Small amount of Resources')], coerce=int)
+    cm_restriction3 = SelectField('Project Duration', choices=[(0, '0-1 Year'), (1, '1-2 Years'), (2, '2+ Years')], coerce=int)
+    cm_restriction4 = SelectField('Procurement Method', choices=[(0, 'Traditional'), (1, 'Design & Build'), (2, 'Other')], coerce=int)
+    cm_restriction5 = SelectField('Project Budget', choices=[(0, 'US$ 1 million'), (1, 'US$ 1-5 million'), (2, 'US$ 5+ million')], coerce=int)
+    cm_restriction6 = SelectField('Resouce Control', choices=[(0, 'Minimum'), (1, 'Measured'), (2, 'Total')], coerce=int)
+    cm_restriction7 = SelectField('Technical Complexity', choices=[(0, 'Low Level'), (1, 'Average Level'), (2, 'High Level')],
+                                  coerce=int)
+    cm_restriction8 = SelectField('Stakeholder Involvement', choices=[(0, 'Little Influence'), (1, 'Influential'), (2, 'Very Influential')],
+                                  coerce=int)
+    cm_restriction9 = SelectField('Carbon Footprint',
+                                  choices=[(0, 'Benchmark'), (1, 'Balanced'), (2, 'Carbon Credits Used')],
+                                  coerce=int)
+
     country = StringField('Country', render_kw={'autocomplete': 'nothing'})
     city = StringField('City', render_kw={'autocomplete': 'nothing'})
     local_authority = StringField('Local Authority', render_kw={'autocomplete': 'nothing'})
