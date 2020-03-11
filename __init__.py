@@ -224,12 +224,18 @@ class ScoreForm(FlaskForm):
     cm_restriction1 = SelectField('Procurement', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
     cm_restriction2 = SelectField('Site Logistics', choices=[(0, 'Slightly Restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
     cm_restriction3 = SelectField('Resource control', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')], coerce=int)
-    cm_restriction4 = SelectField('Bill of Quantities', choices=[(0, 'Precise'), (1, 'Narrow Margin'), (2, 'Standard Margin')], coerce=int)
-    cm_restriction5 = SelectField('Return on Investment', choices=[(0, 'Major Importance'), (1, 'Important'), (2, 'Not so Important')], coerce=int)
-    cm_restriction6 = SelectField('Business transparency', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')], coerce=int)
+
     cm_restriction7 = SelectField('4D BIM knowledge', choices=[(0, 'High Level'), (1, 'Intermediate Level'), (2, 'Beginner Level')], coerce=int)
     cm_restriction8 = SelectField('Stakeholder involvement', choices=[(0, 'Very Influencial'), (1, 'Influencial'), (2, 'Little Influencial')], coerce=int)
     cm_restriction9 = SelectField('Resource planning', choices=[(0, 'Large amount of Resources'), (1, 'Moderate amount of Resources'), (2, 'Small amount of Resources')], coerce=int)
+
+    cm_restriction4 = SelectField('Bill of Quantities',
+                                  choices=[(0, 'Precise'), (1, 'Narrow Margin'), (2, 'Standard Margin')], coerce=int)
+    cm_restriction5 = SelectField('Return on Investment',
+                                  choices=[(0, 'Major Importance'), (1, 'Important'), (2, 'Not so Important')],
+                                  coerce=int)
+    cm_restriction6 = SelectField('Business transparency', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')],
+                                  coerce=int)
     attribute1 = SelectField('Schedule vs actual (WIP)', choices=[(x, str(x)) for x in range(11)], coerce=int)
     attribute2 = SelectField('Discreet event simulation', choices=[(x, str(x)) for x in range(11)], coerce=int)
     attribute3 = SelectField('Simulation', choices=[(x, str(x)) for x in range(11)], coerce=int)
@@ -828,8 +834,8 @@ def mynavbar():
                               View('Log out', 'user.logout')))
     else:
         items.append(Subgroup('Decision Support System',
-                              View('Recommendation', 'recommend'),
-                              View('Add Project', 'add')))
+                              View('Project Based Recommendation Require', 'recommend'),
+                              View('4D BIM Expert - Add Project Details', 'add')))
         items.append(Subgroup('Log in',
                               View('Log in', 'user.login')))
 
@@ -862,15 +868,15 @@ def send_email(receiver_email, project):
     password = "111Munster!!!"
 
     message = """Project Title & Organisation: %s
-Organisation URL: %s
-Country: %s
-City: %s
-Local Authority: %s
-Individual Project Involvement: %s
-Date of Project Completion: %s
-4D Software Application Used: %s
-Software Application Version: %s
-E-mail: %s"""
+                Organisation URL: %s
+                Country: %s
+                City: %s
+                Local Authority: %s
+                Individual Project Involvement: %s
+                Date of Project Completion: %s
+                4D Software Application Used: %s
+                Software Application Version: %s
+                E-mail: %s"""
 
     server = smtplib.SMTP_SSL(smtp_server, port)
     server.login(sender_email, password)

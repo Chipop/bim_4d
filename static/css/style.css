@@ -116,3 +116,15 @@ li {
         display: block;
     }
 }
+
+.form-group .label-red {
+    color: darkred;
+}
+
+.form-group .label-blue {
+    color: darkblue;
+}
+
+.form-group .label-green {
+    color: darkgreen;
+}
