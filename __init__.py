@@ -811,19 +811,19 @@ def mynavbar():
         if is_expert and is_admin:
             items.append(Subgroup('Decision Support System',
                                   View('Recommendation', 'recommend'),
-                                  View('Add Project', 'add'),
+                                  View('4D BIM Expert – Add Project Details', 'add'),
                                   View('Score Projects', 'score', project_id=0),
                                   View('Manage Projects', 'accept', project_id=0),
                                   View('Manage Users', 'useradmin', user_id=0)))
         elif is_expert:
             items.append(Subgroup('Decision Support System',
                                   View('Recommendation', 'recommend'),
-                                  View('Add Project', 'add'),
+                                  View('4D BIM Expert – Add Project Details', 'add'),
                                   View('Score Projects', 'score', project_id=0)))
         elif is_admin:
             items.append(Subgroup('Decision Support System',
                                   View('Recommendation', 'recommend'),
-                                  View('Add Project', 'add'),
+                                  View('4D BIM Expert – Add Project Details', 'add'),
                                   View('Manage Projects', 'accept', project_id=0),
                                   View('Manage Users', 'useradmin', user_id=0)))
         name = current_user.first_name + ' ' + current_user.last_name
