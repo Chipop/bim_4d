@@ -256,18 +256,17 @@ class ScoreForm(FlaskForm):
 
 
 class RecommendForm(FlaskForm):
-    cm_restriction1 = SelectField('Sector Type', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
-    cm_restriction2 = SelectField('Site Logistics', choices=[(0, 'Slightly Restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
-    cm_restriction3 = SelectField('Project Duration', choices=[(0, '0-1 Year'), (1, '1-2 Years'), (2, '2+ Years')], coerce=int)
-    cm_restriction4 = SelectField('Procurement Method', choices=[(0, 'Traditional'), (1, 'Design & Build'), (2, 'Other')], coerce=int)
-    cm_restriction5 = SelectField('Project Budget', choices=[(0, 'US$ 1 million'), (1, 'US$ 1-5 million'), (2, 'US$ 5+ million')], coerce=int)
-    cm_restriction6 = SelectField('Resouce Control', choices=[(0, 'Minimum'), (1, 'Measured'), (2, 'Total')], coerce=int)
-    cm_restriction7 = SelectField('Technical Complexity', choices=[(0, 'Low Level'), (1, 'Average Level'), (2, 'High Level')],
-                                  coerce=int)
-    cm_restriction8 = SelectField('Stakeholder Involvement', choices=[(0, 'Little Influence'), (1, 'Influential'), (2, 'Very Influential')],
+    cm_restriction1 = SelectField('Sector type', choices=[(0, 'Private'), (1, 'Public Private Partnership (PPP)'), (2, 'Public')], coerce=int)
+    cm_restriction2 = SelectField('Site logistics', choices=[(0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
+    cm_restriction3 = SelectField('Project duration', choices=[(0, '0-2 Year'), (1, '2-5 Years'), (2, '5+ Years')], coerce=int)
+    cm_restriction6 = SelectField('Resource control', choices=[(0, 'Total'), (1, 'Sufficient'), (2, 'Restricted')], coerce=int)
+    cm_restriction5 = SelectField('Financial cost of project - High Importance', choices=[(0, '$ 10 - 50 million'), (1, '$ 1 - 10 million'), (2, '$ 0 - 1 million')], coerce=int)
+    cm_restriction7 = SelectField('Waste control - Precise', choices=[(0, 'High level'), (1, 'Standard'), (2, 'Low level')], coerce=int)
+    cm_restriction4 = SelectField('Procurement Method', choices=[(0, 'Traditional'), (1, 'Fixed price'), (2, 'Design & build')], coerce=int)
+    cm_restriction8 = SelectField('Technical  Complexity - Large Involvement', choices=[(0, 'Uniform'), (1, 'Degree of complexity'), (2, 'Complex')],
                                   coerce=int)
     cm_restriction9 = SelectField('Carbon Footprint',
-                                  choices=[(0, 'Benchmark'), (1, 'Balanced'), (2, 'Carbon Credits Used')],
+                                  choices=[(0, 'Green'), (1, 'Sustainable'), (2, 'Carbon credits used')],
                                   coerce=int)
 
     country = StringField('Country', render_kw={'autocomplete': 'nothing'})
