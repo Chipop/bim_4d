@@ -27,8 +27,12 @@ Improving Construction Management with 4D BIM
     <br>
     <p class="bim-page-sub-title">4D BIM</p>
     <p style="font-size:14pt; font-weight: bold;">Home Page</p>
-    <p>Workman on the framework of the Empire State building, 1930.</p>
-    <p class="bim-page-sub-title" align="center">Construction Management</p>
+    <ul>
+        <p>Workman on the framework of the Empire State building, 1930.</p>
+    </ul>
+
+    <br><br>
+    <p class="bim-page-sub-title">Construction Management</p>
     <p class="bim-page-mini-title">4D BIM & Value Added</p>
     <ul>
         <p>Offering an overview of construction management through the use of 4D BIM technology, to achieve a measure of success to a CM project.</p>
@@ -41,11 +45,11 @@ Improving Construction Management with 4D BIM
     <ul>
         <p>Presenting the positive influences that 4D BIM provides throughout the construction process.</p>
     </ul>
-    <br>
-    <div align="center">
-        <img src="{{ url_for('static', filename='img/1.jpg') }}" class="bim-page-img" style="max-width: 50%;">
+    <div class = "container thumbnail" style = "max-width : 50%">
+        <img src="{{ url_for('static', filename='img/1.jpg') }}" class="bim-page-img">
     </div>
-    <br>
+
+    <br><br>
     <p class="bim-page-sub-title">Best Practice 4D BIM</p>
     <p style="font-size:14pt; font-weight: bold;">Best Practice 4D BIM Tool</p>
     <ul>
@@ -53,7 +57,7 @@ Improving Construction Management with 4D BIM
     </ul>
     <p style="font-size:14pt; font-weight: bold;">Explained</p>
     <ul>
-        <p>Provides a detailed structure of the essential elements involved for this analytical decision process that are used when using this system to select a 4D BIM software application for a specific CM project. A mock-up public sector 4D BIM project is shown, which has been created for the purpose of this analysis showing the construction projects set of constraints. This guide can also be downloaded as an xls. file from a download facility at the bottom of this page and the explained page.</p>
+        <p>Provides a detailed structure of the essential elements involved for this analytical decision process that are used when using this system to select a 4D BIM software application for a specific CM project. A mock-up public sector 4D BIM project is shown, which has been created for the purpose of this analysis showing the construction projects set of constraints. This guide can also be downloaded as both an xls. and doc. file from a download facility at the bottom of this page and the explained page.</p>
     </ul>
     <p style="font-size:14pt; font-weight: bold;">Project Constraints</p>
     <ul>
@@ -64,14 +68,14 @@ Improving Construction Management with 4D BIM
         <p>The information provided is a guide defining the requirements of each attribute of a 4D BIM software application.</p>
     </ul>
     <br>
-    <div align="center">
+    <div class = "container thumbnail" style = "max-width : 40%;">
         <img src="{{ url_for('static', filename='img/design1.jpg') }}" class="bim-page-img">
     </div>
     <p style="font-size:14pt; font-weight: bold;">Planned Outputs</p>
     <ul>
         <p>The information provided is a guide relating to the requirements from, which an organisation/end user can associate a degree of success to a 4D BIM project associated with the use of a 4D BIM software application and each of its attributes.</p>
     </ul>
-    <br>
+    <br><br>
     <p class="bim-page-sub-title">Decision Support System Instructions</p>
     <p style="font-size:14pt; font-weight: bold;">Decision Support System: Project Based Recommendation Required</p>
     <ul>
@@ -87,10 +91,10 @@ Improving Construction Management with 4D BIM
     <br>
     <p style="font-size:14pt; font-weight: bold;">4D BIM Expert – Add Project Details</p>
     <ul>
-        <p>A 4D BIM professional is asked to provide information regarding a specific 4D BIM project, which they have been involved with. The information required will include: project title & organisation, project and/or organisation URL, project location defined by country, city and local authority, professional involvement, date of project completion, 4D BIM software application used (synchro, navisworks or asta powerproject), software application version and a contact email. By selecting the add button at the bottom of the page, the 4D BIM professional’s project details are automatically emailed to the administration to verify the projects legitimacy (this information, except the email address will appear with a recommendation).</p>
+        <p>A 4D BIM professional is asked to provide information regarding a specific 4D BIM project, which they have been involved with. The information required will include: project title & organisation, project and/or organisation URL, project location defined by country, city and local authority, professional involvement, date of project completion, 4D BIM software application used (synchro, navisworks or asta powerproject), software application version, specific project defined award(s) won and a contact email. By selecting the add button at the bottom of the page, the 4D BIM professional’s project details are automatically emailed to the administration to verify the projects legitimacy (this information, except the email address will appear with a recommendation).</p>
         <p>The second set of links enables the 4D BIM professional to offer judgement and to provide feedback, regarding their opinions on the 4D BIM software application used for the project that they were involved with and its ability to improve CM. There are a set of questions with two different ways to answer, i.e. multi-choice selection and open-ended answers. Allowing a user to choose to answer one or both methods of answering.</p>
     </ul>
-    <br>
+    <br><br>
     <p class="bim-page-sub-title">Log in</p>
     <p style="font-size:14pt; font-weight: bold;">Score project</p>
     <ul>
@@ -102,9 +106,10 @@ Improving Construction Management with 4D BIM
         <p>The first set of links enables the 4D BIM professional to offer their opinions on the current and proposed methods used when choosing a BIM software application and the 4D BIM DSS. There are a set of questions, with two different ways to answer, i.e. multi-choice selection and open-ended answers. Allowing the 4D professional to choose to answer one or both methods of answering. Multi-choice and/or open-ended.</p>
         <br>
     </ul>
-    <div align="center">
-        <img src="{{ url_for('static', filename='img/design3.jpg') }}" class="bim-page-img" style="max-width: 90%;">
+    <div class = "container thumbnail" style = "max-width : 90%">
+        <img src="{{ url_for('static', filename='img/design3.jpg') }}" class="bim-page-img">
     </div>
+
     <br>
     <p class="bim-page-sub-title">4D BIM DSS USERS</p>
     <p style="font-size:14pt; font-weight: bold;">Professionals Offering a 4D BIM Recommendation</p>
@@ -113,8 +118,8 @@ Improving Construction Management with 4D BIM
     </ul>
     <br>
     <div align="center">
-        <a class="btn btn-info" href="{{ url_for('static', filename='resource/Further Explanation of Decision Support System.xlsx') }}">Download XLS</a>
-        <a class="btn btn-info" href="{{ url_for('static', filename='resource/Project Specific Set of Restrictions.docx') }}">Download DOC</a>
+        <a class="btn btn-info" href="{{ url_for('static', filename='resource/Further Explanation of Decision Support System.xlsx') }}">Download xls.</a>
+        <a class="btn btn-info" href="{{ url_for('static', filename='resource/Project Specific Set of Restrictions.docx') }}">Download doc.</a>
     </div>
     <br>
     <br>

@@ -23,7 +23,7 @@ Recommendation
         {% if id is none %}
             <div class="alert alert-warning" role="alert">Please select project to score</div>
         {% else %}
-            <h3>Project Specific Set of Restrictions</h3>
+            <h3>Project Specific Set of Constraints</h3>
             <form method="POST" action="" autocomplete="off">
                 <dl>
                     {{ wtf.quick_form(form) }}
@@ -33,6 +33,8 @@ Recommendation
         {% endif %}
         </div>
         <div class="col-sm-6">
+            <br>
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/4dbim.png') }}" style = "width : 100%; margin-top : 60px;"/>
             <div class="list-group">
                 {% if projects is none %}
                     <p>There isn't any recommended projects.</p>
@@ -85,6 +87,7 @@ Recommendation
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}

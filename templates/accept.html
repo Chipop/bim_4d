@@ -29,32 +29,26 @@ Manage Projects
                     {% endif %}
                 {% endfor %}
             </div>
-            {% if images is not none %}
-                <h3>Images</h3>
-                <div class="list-group">
-                    {% for image in images %}
-                        <a class="btn btn-info" href="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">{{image}}</a>
-                        <img style="max-width:200pt; max-height: 200pt;" src="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">
-                    {% endfor %}
-                </div>
-            {% endif %}
             {% if files is not none %}
-                <h3>Files</h3>
+                <h3>Data and/or Images</h3>
                 <div class="list-group">
                     {% for file in files %}
                         <a class="btn btn-info" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}}</a>
-                    {% endfor %}
+                    {% else %}
+			<p>No files found.</p>
+		    {% endfor %}
                 </div>
             {% endif %}
         </div>
         <div class="col-sm-6">
+        <h1 style = "color : white">style</h1>
         {% if project_id is none %}
-            <div class="alert alert-warning" role="alert">Please select project to see details.</div>
+            <div class="alert alert-warning" style="margin-top: 67px;" role="alert">Please select project to see details.</div>
         {% else %}
             {% if info is not none %}
-                <div class="alert alert-success" role="alert">{{ info }}</div>
+                <div class="alert alert-success" style="margin-top: 67px;" role="alert">{{ info }}</div>
             {% endif %}
-            <form method="POST" action="" autocomplete="off">
+            <form method="POST" action="" autocomplete="off"  enctype="multipart/form-data">
                 <dl>
                     {{ wtf.quick_form(form) }}
                     <input class="btn btn-primary" type="submit" value="Update">

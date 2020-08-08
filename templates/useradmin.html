@@ -32,6 +32,7 @@ Manage Users
             </div>
         </div>
         <div class="col-sm-6">
+        <h1 style = "color : white">style</h1>
         {% if user_id is none %}
             <div class="alert alert-warning" role="alert">Please select user to modify profile</div>
         {% else %}
@@ -41,7 +42,8 @@ Manage Users
             <form method="POST" action="" autocomplete="off">
                 <dl>
                     {{ wtf.quick_form(form) }}
-                    <input class="btn btn-primary" type="submit" value="Update">
+                    <input class="btn btn-primary" type="submit" name="submit_update_user" value="Update">
+                    <input class="btn btn-primary" type="submit" name="submit_update_user" value="Update and send email">
                     <input class="btn" type="submit" formaction="{{ url_for('add_user') }}" value="Add User"/>
                     {% if user_id is not none and current_user.id != user_id %}
                         <a class="btn" href="{{ url_for('delete_user', user_id=user_id) }}">Delete User</a>

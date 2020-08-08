@@ -194,8 +194,8 @@ class NoValidationSelectMultipleField(SelectMultipleField):
 
 
 class ProjectForm(FlaskForm):
-    title = StringField('Project Title & Organisation', validators=[InputRequired()], render_kw={'autocomplete': 'nothing'})
-    organisation_url = StringField('Organisation URL', render_kw={'autocomplete': 'nothing'})
+    title = StringField('Project Title & Organization', validators=[InputRequired()], render_kw={'autocomplete': 'nothing'})
+    organisation_url = StringField('Organization URL', render_kw={'autocomplete': 'nothing'})
     country = StringField('Country', render_kw={'autocomplete': 'nothing'})
     city = StringField('City', render_kw={'autocomplete': 'nothing'})
     local_authority = StringField('Local Authority', render_kw={'autocomplete': 'nothing'})
@@ -203,6 +203,7 @@ class ProjectForm(FlaskForm):
     date_of_project = DateField('Date of Project Completion', id='date_of_project', format='%Y-%m-%d', validators=[InputRequired()], render_kw={'autocomplete': 'nothing'})
     application = SelectField('4D Software Application Used', choices=[(ind, software_names[ind]) for ind in range(len(software_names))], coerce=int, render_kw={'autocomplete': 'nothing'})
     version = StringField('Software Application Version', validators=[InputRequired()], render_kw={'autocomplete': 'nothing'})
+    award = StringField('Specific Project defined Award(s) won', render_kw={'autocomplete': 'nothing'})
     email = StringField('E-mail', validators=[InputRequired(), Email(message='I don\'t like your email.')])
 
     def reset(self):
@@ -211,8 +212,8 @@ class ProjectForm(FlaskForm):
 
 
 class ScoreForm(FlaskForm):
-    title = StringField('Project Title & Organisation', render_kw={'readonly': True})
-    organisation_url = StringField('Organisation URL', render_kw={'readonly': True})
+    title = StringField('Project Title & Organization', render_kw={'readonly': True})
+    organisation_url = StringField('Organization URL', render_kw={'readonly': True})
     country = StringField('Country', render_kw={'readonly': True})
     city = StringField('City', render_kw={'readonly': True})
     local_authority = StringField('Local Authority', render_kw={'readonly': True})
@@ -220,35 +221,34 @@ class ScoreForm(FlaskForm):
     date_of_project = DateField('Date of Project Completion', id='date_of_project', format='%Y-%m-%d', render_kw={'readonly': True})
     application = NoValidationSelectField('4D Software Application Used', choices=[(ind, software_names[ind]) for ind in range(len(software_names))], coerce=int, render_kw={'readonly': True, 'disabled': True})
     version = StringField('Software Application Version', render_kw={'readonly': True})
+    award = StringField('Specific Project defined Award(s) won', render_kw={'readonly': 'true'})
     email = StringField('E-mail', render_kw={'readonly': True})
-    cm_restriction1 = SelectField('Procurement', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
-    cm_restriction2 = SelectField('Site Logistics', choices=[(0, 'Slightly Restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
-    cm_restriction3 = SelectField('Resource control', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')], coerce=int)
+    cm_restriction1 = SelectField('Sector type', choices=[(0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
+    cm_restriction2 = SelectField('Site logistics', choices=[(0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
+    cm_restriction3 = SelectField('Project duration', choices=[(0, '5 + Years'), (1, '2 - 5 Years'), (2, '0 - 2 Years')], coerce=int)
 
-    cm_restriction7 = SelectField('4D BIM knowledge', choices=[(0, 'High Level'), (1, 'Intermediate Level'), (2, 'Beginner Level')], coerce=int)
-    cm_restriction8 = SelectField('Stakeholder involvement', choices=[(0, 'Very Influencial'), (1, 'Influencial'), (2, 'Little Influencial')], coerce=int)
-    cm_restriction9 = SelectField('Resource planning', choices=[(0, 'Large amount of Resources'), (1, 'Moderate amount of Resources'), (2, 'Small amount of Resources')], coerce=int)
+    cm_restriction7 = SelectField('Development use', choices=[(0, 'Commercial'), (1, 'Industrial'), (2, 'Ohter')], coerce=int)
+    cm_restriction8 = SelectField('Financial cost of project', choices=[(0, '$0-10 million'), (1, '$10-50 million'), (2, '$50+ million')], coerce=int)
+    cm_restriction9 = SelectField('Resource restrictions', choices=[(0, 'Restricted control of supply chain'), (1, 'Sufficient control of supply chain'), (2, 'Total control of supply chain')], coerce=int)
 
-    cm_restriction4 = SelectField('Bill of Quantities',
-                                  choices=[(0, 'Precise'), (1, 'Narrow Margin'), (2, 'Standard Margin')], coerce=int)
-    cm_restriction5 = SelectField('Return on Investment',
-                                  choices=[(0, 'Major Importance'), (1, 'Important'), (2, 'Not so Important')],
+    cm_restriction4 = SelectField('Procurement method',
+                                  choices=[(0, 'Fixed price'), (1, 'Design & build'), (2, 'Other')], coerce=int)
+    cm_restriction5 = SelectField('Technical complexity',
+                                  choices=[(0, 'Standard'), (1, 'Degree of complexity'), (2, 'Technically challenging')],
                                   coerce=int)
-    cm_restriction6 = SelectField('Business transparency', choices=[(0, 'Total'), (1, 'General'), (2, 'Minimal')],
+    cm_restriction6 = SelectField('Carbon footprint', choices=[(0, 'Environmental issues'), (1, 'Sustainable'), (2, 'Green')],
                                   coerce=int)
     attribute1 = SelectField('Schedule vs actual (WIP)', choices=[(x, str(x)) for x in range(11)], coerce=int)
     attribute2 = SelectField('Discreet event simulation', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute3 = SelectField('Simulation', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute4 = SelectField('Quantity Take Off', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute5 = SelectField('Data control', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute6 = SelectField('Animations', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute7 = SelectField('Quality control', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute8 = SelectField('Interoperability', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    attribute9 = SelectField('Clash detection', choices=[(x, str(x)) for x in range(11)], coerce=int)
-    before_images = NoValidationSelectMultipleField('Image Files to remove', choices=[], coerce=int)
-    images = MultipleFileField('New Image Files')
-    before_files = NoValidationSelectMultipleField('Files to remove', choices=[], coerce=int)
-    files = MultipleFileField('New Files')
+    attribute3 = SelectField('Schedule creation/manipulation', choices=[(x, str(x)) for x in range(11)], coerce=int)
+    attribute4 = SelectField('Risk assessment', choices=[(x, str(x)) for x in range(11)], coerce=int)
+    attribute5 = SelectField('Data analysis', choices=[(x, str(x)) for x in range(1,11,1)], coerce=int)
+    attribute6 = SelectField('Construction Supply Chain Management(CSCM)', choices=[(x, str(x)) for x in range(1,11,1)], coerce=int)
+    attribute7 = SelectField('Simulation', choices=[(x, str(x)) for x in range(1,11,1)], coerce=int)
+    attribute8 = SelectField('Clash detection', choices=[(x, str(x)) for x in range(1,11,1)], coerce=int)
+    attribute9 = SelectField('Collaboration', choices=[(x, str(x)) for x in range(1,11,1)], coerce=int)
+    before_files = NoValidationSelectMultipleField('Select files to remove', choices=[], coerce=int)
+    files = MultipleFileField('Data and/or Images file upload')
 
     def reset(self):
         blank_data = {'csrf': self.csrf_token}
@@ -257,16 +257,17 @@ class ScoreForm(FlaskForm):
 
 class RecommendForm(FlaskForm):
     cm_restriction1 = SelectField('Sector type', choices=[(0, 'Private'), (1, 'Public Private Partnership (PPP)'), (2, 'Public')], coerce=int)
-    cm_restriction2 = SelectField('Site logistics', choices=[(0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely Restricted')], coerce=int)
-    cm_restriction3 = SelectField('Project duration', choices=[(0, '0-2 Year'), (1, '2-5 Years'), (2, '5+ Years')], coerce=int)
-    cm_restriction6 = SelectField('Resource control', choices=[(0, 'Total'), (1, 'Sufficient'), (2, 'Restricted')], coerce=int)
-    cm_restriction5 = SelectField('Financial cost of project - High Importance', choices=[(0, '$ 10 - 50 million'), (1, '$ 1 - 10 million'), (2, '$ 0 - 1 million')], coerce=int)
-    cm_restriction7 = SelectField('Waste control - Precise', choices=[(0, 'High level'), (1, 'Standard'), (2, 'Low level')], coerce=int)
-    cm_restriction4 = SelectField('Procurement Method', choices=[(0, 'Traditional'), (1, 'Fixed price'), (2, 'Design & build')], coerce=int)
-    cm_restriction8 = SelectField('Technical  Complexity - Large Involvement', choices=[(0, 'Uniform'), (1, 'Degree of complexity'), (2, 'Complex')],
+    cm_restriction2 = SelectField('Site logistics', choices=[(0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
+    cm_restriction3 = SelectField('Project duration', choices=[(0, '5 + Year'), (1, '2 - 5 Years'), (2, '0 - 2 Years')], coerce=int)
+    cm_restriction6 = SelectField('Development use', choices=[(0, 'Commercial'), (1, 'Industrial'), (2, 'Other')], coerce=int)
+    #cm_restriction10 = StringField('Resource control description', render_kw={'hidden': 'true'})
+    cm_restriction5 = SelectField('Financial cost of project', choices=[(0, '$50 + million'), (1, '$10 - 50 million'), (2, '$0 - 10 million')], coerce=int)
+    cm_restriction7 = SelectField('Resource restrictions', choices=[(0, 'Total control of supply chain'), (1, 'Sufficient control of supply chain'), (2, 'Restricted control of supply chain')], coerce=int)
+    cm_restriction4 = SelectField('Procurement method', choices=[(0, 'Fixed price'), (1, 'Design & bulid'), (2, 'Other')], coerce=int)
+    cm_restriction8 = SelectField('Technical  complexity', choices=[(0, 'Technically challenging'), (1, 'Degree of complexity'), (2, 'Standard')],
                                   coerce=int)
-    cm_restriction9 = SelectField('Carbon Footprint',
-                                  choices=[(0, 'Green'), (1, 'Sustainable'), (2, 'Carbon credits used')],
+    cm_restriction9 = SelectField('Carbon footprint',
+                                  choices=[(0, 'Green'), (1, 'Sustainable'), (2, 'Environmental issues')],
                                   coerce=int)
 
     country = StringField('Country', render_kw={'autocomplete': 'nothing'})
@@ -371,6 +372,7 @@ def add():
             'city': form.city.data,
             'local_authority': form.local_authority.data,
             'version': form.version.data,
+            'awards': form.award.data,
             'date_of_project': form.date_of_project.data.strftime('%Y-%m-%d'),
             'accepted': False,
             'history': False,
@@ -381,6 +383,18 @@ def add():
             'files': []
         }
         save_projects()
+        users = User.query.all()
+        if len([x for x in users if x.email == form.email.data]) == 0:
+            roles = Role.query.all()
+            user = User(
+                email=form.email.data,
+                email_confirmed_at=datetime.datetime.utcnow(),
+                password=user_manager.hash_password('123456'),
+                first_name="",
+                last_name=""
+            )
+            db.session.add(user)
+            db.session.commit()
         send_email("4dbimdecisions@gmail.com", projects[max_id+1])
 
         form.reset()
@@ -404,6 +418,9 @@ configure_uploads(app, [images, files])
 @app.route('/decision-support-system/score-projects/<int:project_id>', methods=['GET', 'POST'])
 @roles_required('Expert')
 def score(project_id):
+    is_expert = len([role for role in current_user.roles if role.name == 'Expert']) > 0
+    is_admin = len([role for role in current_user.roles if role.name == 'Admin']) > 0
+
     if project_id == 0:
         project_id = None
     if project_id is not None:
@@ -411,6 +428,30 @@ def score(project_id):
         project_id = str(project_id)
     form = ScoreForm()
     load_projects()
+    try:
+        is_history  = projects[project_id]['history']
+    except  (TypeError, KeyError):
+        is_history = False
+
+    if is_history:
+        form.cm_restriction1.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction2.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction3.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction4.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction5.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction6.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction7.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction8.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction9.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute1.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute2.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute3.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute4.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute5.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute6.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute7.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute8.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute9.render_kw = {'readonly': True, 'disabled': True}
 
     if request.method == 'GET':
         if project_id is not None:
@@ -423,6 +464,10 @@ def score(project_id):
             form.date_of_project.data = datetime.datetime.strptime(projects[project_id]['date_of_project'], "%Y-%m-%d").date()
             form.application.data = projects[project_id]['application']
             form.version.data = projects[project_id]['version']
+            try :
+                form.award.data = projects[project_id]['awards']
+            except :
+                form.award.data = ""
             form.email.data = projects[project_id]['email']
             form.cm_restriction1.data = projects[project_id]['cm_restrictions'][0]
             form.cm_restriction2.data = projects[project_id]['cm_restrictions'][1]
@@ -442,27 +487,7 @@ def score(project_id):
             form.attribute7.data = projects[project_id]['attribute_ratings'][6]
             form.attribute8.data = projects[project_id]['attribute_ratings'][7]
             form.attribute9.data = projects[project_id]['attribute_ratings'][8]
-            form.before_images.choices = [(x, projects[project_id]['images'][x]) for x in range(len(projects[project_id]['images']))]
             form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
-            if projects[project_id]['history']:
-                form.cm_restriction1.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction2.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction3.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction4.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction5.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction6.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction7.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction8.render_kw = {'readonly': True, 'disabled': True}
-                form.cm_restriction9.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute1.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute2.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute3.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute4.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute5.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute6.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute7.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute8.render_kw = {'readonly': True, 'disabled': True}
-                form.attribute9.render_kw = {'readonly': True, 'disabled': True}
     if request.method == 'POST' and form.validate_on_submit():
         projects[project_id].update({
             'cm_restrictions': [form.cm_restriction1.data,
@@ -484,43 +509,42 @@ def score(project_id):
                                   form.attribute8.data,
                                   form.attribute9.data]
         })
-        form.before_images.choices = [(x, projects[project_id]['images'][x]) for x in range(len(projects[project_id]['images']))]
-        form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
-
-        for ind in form.before_images.data[::-1]:
-            os.remove(base_dir + '/static/upload/img/'+projects[project_id]['images'][ind])
-            del projects[project_id]['images'][ind]
-
-        filenames = []
-        for item in request.files.getlist('images'):
-            filenames.append(images.save(item))
-        projects[project_id]['images'] += filenames
-
-        for ind in form.before_files.data[::-1]:
+	
+	for ind in form.before_files.data[::-1]:
             os.remove(base_dir + '/static/upload/file/'+projects[project_id]['files'][ind])
             del projects[project_id]['files'][ind]
 
         filenames = []
         for item in request.files.getlist('files'):
-            filenames.append(files.save(item))
+            if item:
+                filenames.append(files.save(item))
         projects[project_id]['files'] += filenames
         projects[project_id]['scored'] = True
 
         save_projects()
+	form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
+
+        if  is_admin:
+            filtered_projects = [x for x in projects.values() if x['accepted'] ]
+        #  elif is_expert:
+        else:
+            filtered_projects = [x for x in projects.values() if x['accepted'] and x['email'] == current_user.email]
         return render_template('score.html',
                                form=form,
                                info='Scores successfully updated!',
-                               projects=[x for x in projects.values() if x['accepted'] and x['email'] == current_user.email],
-                               images=None if project_id is None else projects[project_id]['images'],
+                               projects=filtered_projects,
                                files=None if project_id is None else projects[project_id]['files'],
                                project_id=project_id)
+    if  is_admin:
+        filtered_projects = [x for x in projects.values() if x['accepted'] ]
+    #  elif is_expert:
+    else:
+        filtered_projects = [x for x in projects.values() if x['accepted'] and x['email'] == current_user.email]
     return render_template('score.html',
                            form=form, info=None,
-                           projects=[x for x in projects.values() if x['accepted'] and x['email'] == current_user.email],
-                           images=None if project_id is None else projects[project_id]['images'],
+                           projects=filtered_projects,
                            files=None if project_id is None else projects[project_id]['files'],
                            project_id=project_id)
-
 
 @app.route('/decision-support-system/recommendation', methods=['GET', 'POST'])
 def recommend():
@@ -566,24 +590,49 @@ def accept(project_id):
     if project_id is not None:
         project_id = str(project_id)
     form = ScoreForm()
-    form.cm_restriction1.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction2.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction3.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction4.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction5.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction6.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction7.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction8.render_kw = {'readonly': True, 'disabled': True}
-    form.cm_restriction9.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute1.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute2.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute3.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute4.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute5.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute6.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute7.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute8.render_kw = {'readonly': True, 'disabled': True}
-    form.attribute9.render_kw = {'readonly': True, 'disabled': True}
+
+    try:
+        is_history  = projects[project_id]['history']
+    except  (TypeError, KeyError):
+        is_history = False
+        
+    if is_history:
+        form.cm_restriction1.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction2.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction3.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction4.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction5.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction6.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction7.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction8.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction9.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute1.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute2.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute3.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute4.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute5.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute6.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute7.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute8.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute9.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction1.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction2.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction3.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction4.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction5.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction6.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction7.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction8.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction9.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute1.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute2.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute3.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute4.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute5.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute6.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute7.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute8.render_kw = {'readonly': True, 'disabled': True}
+        form.attribute9.render_kw = {'readonly': True, 'disabled': True}
     load_projects()
     if request.method == 'GET':
         if project_id is not None:
@@ -596,6 +645,10 @@ def accept(project_id):
             form.date_of_project.data = datetime.datetime.strptime(projects[project_id]['date_of_project'], "%Y-%m-%d").date()
             form.application.data = projects[project_id]['application']
             form.version.data = projects[project_id]['version']
+            try :
+                form.award.data = projects[project_id]['awards']
+            except :
+                form.award.data = ""
             form.email.data = projects[project_id]['email']
             form.cm_restriction1.data = projects[project_id]['cm_restrictions'][0]
             form.cm_restriction2.data = projects[project_id]['cm_restrictions'][1]
@@ -615,23 +668,30 @@ def accept(project_id):
             form.attribute7.data = projects[project_id]['attribute_ratings'][6]
             form.attribute8.data = projects[project_id]['attribute_ratings'][7]
             form.attribute9.data = projects[project_id]['attribute_ratings'][8]
-            form.before_images.choices = [(x, projects[project_id]['images'][x]) for x in range(len(projects[project_id]['images']))]
             form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
     if request.method == 'POST' and form.validate_on_submit():
-
-        form.before_images.choices = [(x, projects[project_id]['images'][x]) for x in range(len(projects[project_id]['images']))]
-        form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
-
-        for ind in form.before_images.data[::-1]:
-            os.remove(base_dir + '/static/upload/img/'+projects[project_id]['images'][ind])
-            del projects[project_id]['images'][ind]
-
-        filenames = []
-        for item in request.files.getlist('images'):
-            filenames.append(images.save(item))
-        projects[project_id]['images'] += filenames
-
-        for ind in form.before_files.data[::-1]:
+        projects[project_id].update({
+            'cm_restrictions': [form.cm_restriction1.data,
+                                form.cm_restriction2.data,
+                                form.cm_restriction3.data,
+                                form.cm_restriction4.data,
+                                form.cm_restriction5.data,
+                                form.cm_restriction6.data,
+                                form.cm_restriction7.data,
+                                form.cm_restriction8.data,
+                                form.cm_restriction9.data],
+            'attribute_ratings': [form.attribute1.data,
+                                  form.attribute2.data,
+                                  form.attribute3.data,
+                                  form.attribute4.data,
+                                  form.attribute5.data,
+                                  form.attribute6.data,
+                                  form.attribute7.data,
+                                  form.attribute8.data,
+                                  form.attribute9.data]
+        })
+	
+	for ind in form.before_files.data[::-1]:
             os.remove(base_dir + '/static/upload/file/'+projects[project_id]['files'][ind])
             del projects[project_id]['files'][ind]
 
@@ -639,14 +699,15 @@ def accept(project_id):
         for item in request.files.getlist('files'):
             filenames.append(files.save(item))
         projects[project_id]['files'] += filenames
+	projects[project_id]['accepted'] = True
 
         save_projects()
+	form.before_files.choices = [(x, projects[project_id]['files'][x]) for x in range(len(projects[project_id]['files']))]
         return render_template('accept.html',
                                form=form,
                                info='Project data successfully updated!',
                                projects=list(projects.values()),
                                project_id=project_id,
-                               images=None if project_id is None else projects[project_id]['images'],
                                files=None if project_id is None else projects[project_id]['files'],
                                accepted=True if project_id is None else projects[project_id]['accepted'],
                                history=True if project_id is None else projects[project_id]['history'])
@@ -654,7 +715,6 @@ def accept(project_id):
                            form=form, info=None,
                            projects=list(projects.values()),
                            project_id=project_id,
-                           images=None if project_id is None else projects[project_id]['images'],
                            files=None if project_id is None else projects[project_id]['files'],
                            accepted=True if project_id is None else projects[project_id]['accepted'],
                            history=True if project_id is None else projects[project_id]['history'])
@@ -727,6 +787,8 @@ def useradmin(user_id):
 
         form.roles.choices = [(x.id, x.name) for x in roles]
         form.roles.data = [x.id for x in user.roles]
+        if request.form['submit_update_user'] == "Update and send email":
+            send_email_to_new_user(form.email.data)
 
         return render_template('useradmin.html',
                                form=form,
@@ -833,7 +895,7 @@ def mynavbar():
                               View('Log out', 'user.logout')))
     else:
         items.append(Subgroup('Decision Support System',
-                              View('Project Based Recommendation Require', 'recommend'),
+                              View('Project Based Recommendation Required', 'recommend'),
                               View('4D BIM Expert - Add Project Details', 'add')))
         items.append(Subgroup('Log in',
                               View('Log in', 'user.login')))
@@ -861,10 +923,10 @@ Bootstrap(app)
 
 
 def send_email(receiver_email, project):
-    port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = "damien.kavanagh.aec.services@gmail.com"  # Enter your address
-    password = "111Munster!!!"
+    port = 587  # For SSL
+    smtp_server = "smtp.office365.com"
+    sender_email = "dbimdecisions-no-reply@outlook.com"  # Enter your address
+    password = "Azerty123456789"
 
     message = """Project Title & Organisation: %s
                 Organisation URL: %s
@@ -877,7 +939,9 @@ def send_email(receiver_email, project):
                 Software Application Version: %s
                 E-mail: %s"""
 
-    server = smtplib.SMTP_SSL(smtp_server, port)
+    server = smtplib.SMTP(smtp_server,port)
+    server.ehlo()
+    server.starttls()
     server.login(sender_email, password)
 
     msg = MIMEText(message % (project['title'],
@@ -895,7 +959,32 @@ def send_email(receiver_email, project):
     msg['To'] = receiver_email
 
     server.sendmail(sender_email, receiver_email, msg.as_string())
+    server.quit()
 
+def send_email_to_new_user(receiver_email):
+    port = 587  # For SSL
+    smtp_server = "smtp.office365.com"
+    sender_email = "dbimdecisions-no-reply@outlook.com"  # Enter your address
+    password = "Azerty123456789"
+
+    message = """Hello, 
+                Your account was created. You can login in https://4dbimdecisions.com/user/sign-in: 
+                Your login: %s
+                Your password: 123456 """
+
+    server = smtplib.SMTP(smtp_server, port)
+    server.ehlo()
+    server.starttls()
+    server.login(sender_email, password)
+
+    msg = MIMEText(message % (receiver_email))
+
+    msg['Subject'] = "New 4D BIM Project"
+    msg['From'] = "4dbimdecisions.com"
+    msg['To'] = receiver_email
+
+    server.sendmail(sender_email, receiver_email, msg.as_string())
+    server.quit()
 
 if __name__ == '__main__':
     app.run(debug=True)

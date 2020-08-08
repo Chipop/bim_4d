@@ -19,9 +19,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 text-center">
-                <p style="font-size: 14pt; font-weight: bold; text-align: center;">Legend</p>
-            </div>
             <div class="col-sm-6">
                 <h1>Projects</h1>
                 <div class="list-group">
@@ -33,21 +30,14 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                {% if images is not none %}
-                    <h3>Images</h3>
-                    <div class="list-group">
-                        {% for image in images %}
-                            <a class="btn btn-info" href="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">{{image}}</a>
-                            <img style="max-width:200pt; max-height: 200pt;" src="{{ url_for('static', filename='upload/img/%s'%image) }}" class="list-group-item">
-                        {% endfor %}
-                    </div>
-                {% endif %}
                 {% if files is not none %}
-                    <h3>Files</h3>
+                    <h3>Data and/or Images</h3>
                     <div class="list-group">
                         {% for file in files %}
                             <a class="btn btn-info" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}}</a>
-                        {% endfor %}
+                        {% else %}
+				<p>No files found</p>
+			{% endfor %}
                     </div>
                 {% endif %}
                 {% if project_id is not none %}
@@ -66,12 +56,13 @@
                 {% endif %}
             </div>
             <div class="col-sm-6">
-                {% if project_id is none %}
-                    <div class="alert alert-warning" role="alert">Please select project to score</div>
-                {% else %}
-                    {% if info is not none %}
-                        <div class="alert alert-success" role="alert">{{ info }}</div>
+		{% if info is not none %}
+                        <div class="alert alert-success" style="margin-top: 67px;"  role="alert">{{ info }}</div>
                     {% endif %}
+
+                {% if project_id is none %}
+                    <div class="alert alert-warning" style="margin-top: 67px;"  role="alert">Please select project to score</div>
+                {% else %}
                     <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
                         {{ form.hidden_tag() }}
                         <dl>
@@ -79,7 +70,7 @@
                             {% for field in form %}
                                 <div class="form-group">
                                     {% if field.name == 'title' %}
-                                        <p style="color: darkred; text-align: center;font-weight: bold;">Project Details</p>
+                                        <p style="color: darkred; text-align: center;font-weight: bold; {% if not info %}  margin-top:67px;{% endif %}">Project Details</p>
                                     {% elif field.name == 'cm_restriction1' %}
                                         <p style="color: darkblue; text-align: center;font-weight: bold;">Project Constraints</p>
                                         <p style="font-size: 14pt; color: darkblue; font-weight: bold; ">TIME</p>

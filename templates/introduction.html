@@ -16,7 +16,9 @@ Introduction
 {% endblock %}
 
 {% block content %}
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 <div class="container">
     <br>
     <div align="center">
@@ -27,10 +29,10 @@ Introduction
     <br>
     <p>It is the aim of this program to make a project specific recommendation derived from information taken from a number of 4D BIM professionals, the experience gained from the prior use of the 4D BIM software application and the relevant conclusions that were made. A series of back links will be shown that directs a person to the web site of the organisation and/or project for which the 4D BIM professional has based a recommendation. This information will provide others with a recommendation based on, which of the three 4D BIM software applications to use for a planned project, assessed from a number of project specific constraints and the subsequent planned 4D BIM requirements. To define a projects constraints a classification method has been developed to represent both a planned project and a completed project. To offer a greater understanding of project similarities a 4D BIM professional will offer opinions established from the ability of each 4D BIM attribute to enhance the improvement of CM, established through the use of the 4D BIM software application defined by a set of CM constraints. Both the user looking for a recommendation and the 4D professional offering a knowledge based recommendation are presented with a series of choices to define their requirements of a 4D BIM software application. The choices are structured from an established project management tool known as ‘the iron triangle’, which states that a series of three project management constraints are common to all construction projects and can be categorised into three groups.</p>
     <br>
-    <div align="center">
-        <img src="{{ url_for('static', filename='img/pic1.png') }}" style="width: 50%; height: 50%;">
+    <div class = "container thumbnail" style = "width : 50%;">
+        <img src="{{ url_for('static', filename='img/pic1.png') }}" style = "margin-bottom : 10px;">
+        <p style="text-align: center; font-style: italic; text-align : center">A project specific set of constraints are derived from a list of three elements: time, cost and quality.</p>
     </div>
-    <p style="text-align: center; font-style: italic;">A project specific set of constraints are derived from a list of three elements: time, cost and quality.</p>
     <p>To reinforce the DSS process, these three elements are further defined by creating three sub-sets, each of, which offer the ability to establish the specific project requirement definitions.</p>
     <br>
     <br>

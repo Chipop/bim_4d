@@ -19,16 +19,33 @@ Add Project
 {% endblock %}
 
 {% block content %}
-<div class="container">
-{% if info is not none %}
-    <div class="alert alert-success" role="alert">{{ info }}</div>
-{% endif %}
-    <form method="POST" action="" autocomplete="off" style="position: relative;">
-        <dl>
-            {{ wtf.quick_form(form) }}
-            <input class="btn btn-primary btn-block" type="submit" value="Add">
-        </dl>
-    </form>
+<div class="container-fluid">
+<br>
+    <div class = "row">
+        <div class = "col-sm-3">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP1.jpg') }}" style = "width : 100%; margin-top : 24px;">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP2.jpg') }}" style = "width : 100%; margin-top : 70px;">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP3.jpg') }}" style = "width : 100%; margin-top : 70px;">
+        </div>
+        <div class = "col-sm-6">
+            {% if info is not none %}
+                <div class="alert alert-success" role="alert">{{ info }}</div>
+            {% endif %}
+            <form method="POST" action="" autocomplete="off" style="position: relative;">
+                <dl>
+                    {{ wtf.quick_form(form) }}
+                    <br>
+                    <input class="btn btn-primary btn-block" type="submit" value="Add">
+                    <br><br>
+                </dl>
+            </form>
+        </div>
+        <div class = "col-sm-3">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP4.jpg') }}" style = "width : 100%; margin-top : 24px;">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP5.jpg') }}" style = "width : 100%; margin-top : 70px;">
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/addP6.jpg') }}" style = "width : 100%; margin-top : 70px;">
+        </div>
+    </div>
 </div>
 {% endblock %}
 
