@@ -583,31 +583,32 @@ def score(project_id):
                 form.project_before_files.choices = [(x, projects[project_id]['project_files'][x]) for x in range(
                     len(projects[project_id]['project_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['project_files'] = []
 
             try:
                 form.cm_restriction6_before_files.choices = [(x, projects[project_id]['cm_restriction6_files'][x]) for x in range(
                     len(projects[project_id]['cm_restriction6_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['cm_restriction6_files'] = []
 
             try:
                 form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
                     len(projects[project_id]['attribute3_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute3_files'] = []
 
             try:
                 form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
                     len(projects[project_id]['attribute6_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute6_files'] = []
 
             try:
                 form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
                     len(projects[project_id]['attribute9_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute9_files'] = []
+                
     if request.method == 'POST' and form.validate_on_submit():
         projects[project_id].update({
             'cm_restrictions': [form.cm_restriction1.data,
@@ -908,31 +909,31 @@ def accept(project_id):
                 form.project_before_files.choices = [(x, projects[project_id]['project_files'][x]) for x in range(
                     len(projects[project_id]['project_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['project_files'] = []
 
             try:
                 form.cm_restriction6_before_files.choices = [(x, projects[project_id]['cm_restriction6_files'][x]) for x in range(
                     len(projects[project_id]['cm_restriction6_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['cm_restriction6_files'] = []
 
             try:
                 form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
                     len(projects[project_id]['attribute3_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute3_files'] = []
 
             try:
                 form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
                     len(projects[project_id]['attribute6_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute6_files'] = []
 
             try:
                 form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
                     len(projects[project_id]['attribute9_files']))]
             except  KeyError:
-                pass
+                projects[project_id]['attribute9_files'] = []
 
     if request.method == 'POST' and form.validate_on_submit():
         projects[project_id].update({
