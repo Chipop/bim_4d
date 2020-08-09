@@ -2,116 +2,262 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block head %}
-    <meta charset="UTF-8" />
-    <meta content="An analytical process has been developed, which incorporates a decision support system (DSS). Used to aid in the decision making process to decide, which 4D BIM software application (synchro, navisworks asta or powerproject) is best suited to a construction project, established from a project specific set of requirements." name="description">
-    <meta content="4D BIM, synchro, asta power project & navisworks" name="keywords">
-    {{ super() }}
+<meta charset="UTF-8" />
+<meta
+  content="An analytical process has been developed, which incorporates a decision support system (DSS). Used to aid in the decision making process to decide, which 4D BIM software application (synchro, navisworks asta or powerproject) is best suited to a construction project, established from a project specific set of requirements."
+  name="description">
+<meta content="4D BIM, synchro, asta power project & navisworks" name="keywords">{{ super() }}
 {% endblock %}
 
 {% block title %}
-    Score Project
+Manage Projects
+{% endblock %}
+
+{%  block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='vendor/lightbox/css/lightbox.min.css')}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+{{super()}}
+
+
+<style media="screen">
+  .mb--20 {
+    margin-bottom: 20px;
+  }
+
+  .mt--10{
+    margin-top:10px;
+  }
+
+  .image-link-zoom{
+    position:relative;
+  }
+
+  .image-link-zoom i{
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 18px;
+    color: white;
+    background-color: #0000006e;
+    border-radius: 50%;
+    padding: 7px;
+  }
+</style>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static', filename='vendor/lightbox/js/lightbox.min.js')}}"></script>
 {% endblock %}
 
 {% block navbar %}
-    {{ nav.mynavbar.render(renderer='inverted') }}
+{{ nav.mynavbar.render(renderer='inverted') }}
 {% endblock %}
 {% block content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>Projects</h1>
-                <div class="list-group">
-                    {% for project in projects %}
-                        {% if project['id']==project_id %}
-                            <a href="{{ url_for('score', project_id=project['id'])}}" class="list-group-item active">{{project['title']}}</a>
-                        {% else %}
-                            <a href="{{ url_for('score', project_id=project['id'])}}" class="list-group-item">{{project['title']}}</a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                {% if files is not none %}
-                    <h3>Data and/or Images</h3>
-                    <div class="list-group">
-                        {% for file in files %}
-                            <a class="btn btn-info" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}}</a>
-                        {% else %}
-				<p>No files found</p>
-			{% endfor %}
-                    </div>
-                {% endif %}
-                {% if project_id is not none %}
-                    <a href="https://www.surveymonkey.com/r/2XG8VNJ">4D BIM Professional's opinions of current & proposed methods of the 4D BIM Decision Support System - Multiple choice</a>
-                    <br>
-                    <br>
-                    <a href="https://www.surveymonkey.com/r/V3BT3FC">4D BIM Professional opinions of current & proposed methods of the 4D BIM Decision Support System - Questions</a>
-                    <br>
-                    <br>
-                    <a href="https://www.surveymonkey.com/r/2YKV8RD">4D BIM Professional's opinions of current & proposed methods of the 4D BIM Decision Support System - Multiple choice</a>
-                    <br>
-                    <br>
-                    <a href="https://www.surveymonkey.com/r/2D6LL7G">4D BIM Professional's opinions of the influence of 4D BIM on improving construction management. - Questions</a>
-                    <br>
-                    <br>
-                {% endif %}
-            </div>
-            <div class="col-sm-6">
-		{% if info is not none %}
-                        <div class="alert alert-success" style="margin-top: 67px;"  role="alert">{{ info }}</div>
-                    {% endif %}
-
-                {% if project_id is none %}
-                    <div class="alert alert-warning" style="margin-top: 67px;"  role="alert">Please select project to score</div>
-                {% else %}
-                    <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
-                        {{ form.hidden_tag() }}
-                        <dl>
-                            {#{{ wtf.quick_form(form) }}#}
-                            {% for field in form %}
-                                <div class="form-group">
-                                    {% if field.name == 'title' %}
-                                        <p style="color: darkred; text-align: center;font-weight: bold; {% if not info %}  margin-top:67px;{% endif %}">Project Details</p>
-                                    {% elif field.name == 'cm_restriction1' %}
-                                        <p style="color: darkblue; text-align: center;font-weight: bold;">Project Constraints</p>
-                                        <p style="font-size: 14pt; color: darkblue; font-weight: bold; ">TIME</p>
-                                    {% elif field.name == 'cm_restriction4' %}
-                                        <p style="font-size: 14pt; color: darkblue; font-weight: bold;">COST</p>
-                                    {% elif field.name == 'cm_restriction7' %}
-                                        <p style="font-size: 14pt; color: darkblue; font-weight: bold;">QUALITY</p>
-                                    {% elif field.name == 'attribute1' %}
-                                        <p style="color: darkgreen; text-align: center; font-weight:bold">Project Based 4D BIM Attributes</p>
-                                        <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">TIME</p>
-                                    {% elif field.name == 'attribute4' %}
-                                        <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">COST</p>
-                                    {% elif field.name == 'attribute7' %}
-                                        <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">QUALITY</p>
-                                    {% endif %}
-
-                                    {% if field.name in 'title,organisation_url,country,city,local_authority,involvement,date_of_project,application,version,email' %}
-                                        {{ field.label(class='control-label ') }}
-                                        {{ field(class='form-control') }}
-                                    {% elif 'cm_restriction' in field.name %}
-                                        {{ field.label(class='control-label ') }}
-                                        {{ field(class='form-control') }}
-                                        {#{{ wtf.form_field(field, class='form-control label-blue') }}#}
-                                    {% elif 'attribute' in field.name %}
-                                        {{ field.label(class='control-label ') }}
-                                        {{ field(class='form-control') }}
-                                    {% elif field.name != 'csrf_token' %}
-                                        {{ wtf.form_field(field, class='form-control') }}
-                                    {% endif %}
-                                </div>
-
-                            {% endfor %}
-
-                            <input class="btn btn-primary" type="submit" value="Update">
-                        </dl>
-                    </form>
-                {% endif %}
-            </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <h1>Projects</h1>
+      <div class="list-group">
+        {% for project in projects %}
+        {% if project['id']==project_id %}
+        <a href="{{ url_for('accept', project_id=project['id']) }}" class="list-group-item active">{{project['title']}}</a>
+        {% else %}
+        <a href="{{ url_for('accept', project_id=project['id']) }}" class="list-group-item">{{project['title']}}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% if files is not none %}
+        <h3 style="margin:30px 0 15px 0 ;">Project details Data and/or Images</h3>
+        <div class="list-group">
+          {% for file in files %}
+            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="Project Image">
+                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
+                    <i class="fa   fa-search"></i>
+                </a>
+            {% else %}
+              <div class="">
+                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+              </div>
+            {% endif %}
+          {% else %}
+          <p>No data uploaded.</p>
+          {% endfor %}
         </div>
+      {% endif %}
+
+      {% if files_constraints is not none %}
+        <h3 style="margin:30px 0 15px 0 ;">Project constraints Data and/or Images</h3>
+        <div class="list-group">
+          {% for file in files_constraints %}
+            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
+                    <i class="fa   fa-search"></i>
+                </a>
+            {% else %}
+              <div class="">
+                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+              </div>
+            {% endif %}
+          {% else %}
+          <p>No data uploaded.</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if files_attributes_time is not none %}
+        <h3 style="margin:30px 0 15px 0 ;">PB4D TIME Data and/or Images</h3>
+        <div class="list-group">
+          {% for file in files_attributes_time %}
+            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
+                    <i class="fa   fa-search"></i>
+                </a>
+            {% else %}
+              <div class="">
+                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+              </div>
+            {% endif %}
+          {% else %}
+          <p>No data uploaded.</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if files_attributes_cost is not none %}
+        <h3 style="margin:30px 0 15px 0 ;">PB4D COST Data and/or Images</h3>
+        <div class="list-group">
+          {% for file in files_attributes_cost %}
+            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project PB4D COST Image">
+                    <i class="fa   fa-search"></i>
+                </a>
+            {% else %}
+              <div class="">
+                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+              </div>
+            {% endif %}
+          {% else %}
+          <p>No data uploaded.</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if files_attributes_quality is not none %}
+        <h3 style="margin:30px 0 15px 0 ;">PB4D QUALITY Data and/or Images</h3>
+        <div class="list-group">
+          {% for file in files_attributes_quality %}
+            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project PB4D QUALITY Image">
+                    <i class="fa   fa-search"></i>
+                </a>
+            {% else %}
+              <div class="">
+                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+              </div>
+            {% endif %}
+          {% else %}
+          <p>No data uploaded.</p>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
-{% endblock %}
-{% block scripts %}
-    {{ super() }}
+    <div class="col-sm-9">
+      <h1 style="color : white">style</h1>
+      {% if project_id is none %}
+      <div class="alert alert-warning"  role="alert">Please select project to see details.</div>
+      {% else %}
+      {% if info is not none %}
+      <div class="alert alert-success"  role="alert">{{ info }}</div>
+      {% endif %}
+      <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="row">
+          <div class="col-sm-4">
+
+            {% for field in form %}
+            {% if field.name == 'title' %}
+                <p style="color: darkred; text-align: center;font-weight: bold;margin-bottom: 45px;">Project Details</p>
+            {% endif %}
+
+              {% if field.name in 'title,organisation_url,country,city,local_authority,involvement,date_of_project,application,version,email,award,project_before_files,project_files' %}
+                {{ field.label(class='control-label ') }}
+                {{ field(class='form-control mb--20') }}
+              {% endif %}
+            {% endfor %}
+
+          </div>
+          <div class="col-sm-4">
+            {% for field in form %}
+              {% if field.name == 'cm_restriction1' %}
+                  <p style="color: darkblue; text-align: center;font-weight: bold;">Project Constraints</p>
+                  <p style="font-size: 14pt; color: darkblue; font-weight: bold; ">TIME</p>
+              {% elif field.name == 'cm_restriction4' %}
+                  <p style="font-size: 14pt; color: darkblue; font-weight: bold;">COST</p>
+              {% elif field.name == 'cm_restriction7' %}
+                  <p style="font-size: 14pt; color: darkblue; font-weight: bold;">QUALITY</p>
+            {% endif %}
+
+              {% if 'cm_restriction' in field.name %}
+                {{ field.label(class='control-label ') }}
+                {{ field(class='form-control mb--20') }}
+                {#{{ wtf.form_field(field, class='form-control label-blue') }}#}
+              {% endif %}
+
+            {% endfor %}
+
+          </div>
+
+          <div class="col-sm-4">
+            {% for field in form %}
+                {% if field.name == 'attribute1' %}
+                    <p style="color: darkgreen; text-align: center; font-weight:bold">Project Based 4D BIM Attributes</p>
+                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">TIME</p>
+                {% elif field.name == 'attribute4' %}
+                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">COST</p>
+                {% elif field.name == 'attribute7' %}
+                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">QUALITY</p>
+              {% endif %}
+
+              {% if 'attribute' in field.name %}
+                {{ field.label(class='control-label ') }}
+                {{ field(class='form-control mb--20') }}
+              {% endif %}
+
+            {% endfor %}
+
+
+          </div>
+
+          <div class="col-sm-12 mb--20" style="text-align:center;">
+            <input class="btn btn-primary" type="submit" value="Update">
+            {% if not accepted %}
+            <a class="btn" href="{{ url_for('accept_project', project_id=project_id) }}">Accept</a>
+            {% else %}
+            {% if not history %}
+            <a class="btn" href="{{ url_for('add_history_project', project_id=project_id) }}">Move To History</a>
+            {% else %}
+            <a class="btn" href="{{ url_for('remove_history_project', project_id=project_id) }}">Remove From History</a>
+            {% endif %}
+            {% endif %}
+            {% if not history %}
+            <a class="btn" href="{{ url_for('delete_project', project_id=project_id) }}">Delete</a>
+            {% endif %}
+          </div>
+        </div>
+
+
+
+
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}
