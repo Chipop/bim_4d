@@ -542,13 +542,15 @@ def score(project_id):
         form.attribute9.render_kw = {'readonly': True, 'disabled': True}
         form.project_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.project_files.render_kw = {'readonly': True, 'disabled': True}
-        form.attribute3_before_files.render_kw = {'readonly': True, 'disabled': True}
+        form.project_before_files.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction6_before_files.render_kw = {'readonly': True, 'disabled': True}
+        form.cm_restriction6_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute3_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute6_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute6_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute9_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute9_files.render_kw = {'readonly': True, 'disabled': True}
-        
+
 
     if request.method == 'GET':
         if project_id is not None:
