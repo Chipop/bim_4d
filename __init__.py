@@ -503,6 +503,7 @@ configure_uploads(app, [images, files])
 @app.route('/decision-support-system/score-projects/<int:project_id>', methods=['GET', 'POST'])
 @roles_required('Expert')
 def score(project_id):
+
     is_expert = len(
         [role for role in current_user.roles if role.name == 'Expert']) > 0
     is_admin = len(
@@ -608,7 +609,7 @@ def score(project_id):
                     len(projects[project_id]['attribute9_files']))]
             except  KeyError:
                 projects[project_id]['attribute9_files'] = []
-                
+
     if request.method == 'POST' and form.validate_on_submit():
         projects[project_id].update({
             'cm_restrictions': [form.cm_restriction1.data,
@@ -1164,6 +1165,7 @@ def useradmin(user_id):
         user = [x for x in users if x.id == user_id][0]
         user.first_name = form.first_name.data
         user.last_name = form.last_name.data
+        user.email_confirmed_at = datetime.datetime.utcnow()
         user.roles = [x for x in roles if x.id in form.roles.data]
         db.session.commit()
 
