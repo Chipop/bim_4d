@@ -50,6 +50,21 @@ li {
     right: 10px;
 }
 
+.bim_title{
+	font-family: verdana,"helvetica", "sans-serif";
+	font-style: italic;
+	font-weight:bold;
+	font-size: 14pt;
+}
+
+.bim_subtitle{
+	font-family: verdana,"helvetica", "sans-serif";
+	font-style: italic;
+	font-size: 12pt;
+	font-weight:bold;
+}
+
+
 .bim-title {
     font-family: "Century Gothic", verdana, helvetica, sans-serif;
     font-weight: normal;

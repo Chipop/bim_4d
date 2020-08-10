@@ -7,6 +7,7 @@
   content="An analytical process has been developed, which incorporates a decision support system (DSS). Used to aid in the decision making process to decide, which 4D BIM software application (synchro, navisworks asta or powerproject) is best suited to a construction project, established from a project specific set of requirements."
   name="description">
 <meta content="4D BIM, synchro, asta power project & navisworks" name="keywords">{{ super() }}
+
 {% endblock %}
 
 {% block title %}
@@ -54,11 +55,11 @@ Manage Projects
 {{ nav.mynavbar.render(renderer='inverted') }}
 {% endblock %}
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?r=1">
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3">
-      <h1>Projects</h1>
+      <h1 class="bim_title">Accepted 4D BIM Projects</h1>
       <div class="list-group">
         {% for project in projects %}
         {% if project['id']==project_id %}
@@ -69,7 +70,7 @@ Manage Projects
         {% endfor %}
       </div>
       {% if files is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">Project details Data and/or Images</h3>
+        <h3 style="margin:30px 0 15px 0 ;">Data and/or Images</h3>
         <div class="list-group">
           {% for file in files %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -83,13 +84,11 @@ Manage Projects
               </div>
             {% endif %}
           {% else %}
-          <p>No data uploaded.</p>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if files_constraints is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">Project constraints Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_constraints %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -103,13 +102,11 @@ Manage Projects
               </div>
             {% endif %}
           {% else %}
-          <p>No data uploaded.</p>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if files_attributes_time is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">PB4D TIME Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_attributes_time %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -123,13 +120,11 @@ Manage Projects
               </div>
             {% endif %}
           {% else %}
-          <p>No data uploaded.</p>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if files_attributes_cost is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">PB4D COST Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_attributes_cost %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -143,13 +138,11 @@ Manage Projects
               </div>
             {% endif %}
           {% else %}
-          <p>No data uploaded.</p>
           {% endfor %}
         </div>
       {% endif %}
 
       {% if files_attributes_quality is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">PB4D QUALITY Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_attributes_quality %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -163,7 +156,7 @@ Manage Projects
               </div>
             {% endif %}
           {% else %}
-          <p>No data uploaded.</p>
+
           {% endfor %}
         </div>
       {% endif %}
@@ -183,7 +176,7 @@ Manage Projects
 
             {% for field in form %}
             {% if field.name == 'title' %}
-                <p style="color: darkred; text-align: center;font-weight: bold;margin-bottom: 45px;">Project Details</p>
+                <h2 class="bim_title">Project Details</h2>
             {% endif %}
 
               {% if field.name in 'title,organisation_url,country,city,local_authority,involvement,date_of_project,application,version,email,award,project_before_files,project_files' %}
@@ -196,12 +189,12 @@ Manage Projects
           <div class="col-sm-4">
             {% for field in form %}
               {% if field.name == 'cm_restriction1' %}
-                  <p style="color: darkblue; text-align: center;font-weight: bold;">Project Constraints</p>
-                  <p style="font-size: 14pt; color: darkblue; font-weight: bold; ">TIME</p>
+                  <h2 class="bim_title">Project Constraints</h2>
+                  <h3 class="bim_subtitle">TIME</h3>
               {% elif field.name == 'cm_restriction4' %}
-                  <p style="font-size: 14pt; color: darkblue; font-weight: bold;">COST</p>
+                  <h3  class="bim_subtitle" >COST</h3>
               {% elif field.name == 'cm_restriction7' %}
-                  <p style="font-size: 14pt; color: darkblue; font-weight: bold;">QUALITY</p>
+                  <h3  class="bim_subtitle">QUALITY</h3>
             {% endif %}
 
               {% if 'cm_restriction' in field.name %}
@@ -217,12 +210,12 @@ Manage Projects
           <div class="col-sm-4">
             {% for field in form %}
                 {% if field.name == 'attribute1' %}
-                    <p style="color: darkgreen; text-align: center; font-weight:bold">Project Based 4D BIM Attributes</p>
-                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">TIME</p>
+                    <h2 class="bim_title">Project Based 4D BIM Attributes</h2>
+                    <h3  class="bim_subtitle" >TIME</h3>
                 {% elif field.name == 'attribute4' %}
-                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">COST</p>
+                    <h3 class="bim_subtitle">COST</h3>
                 {% elif field.name == 'attribute7' %}
-                    <p style="font-size: 14pt; color: darkgreen; font-weight: bold;">QUALITY</p>
+                    <h3 class="bim_subtitle" >QUALITY</h3>
               {% endif %}
 
               {% if 'attribute' in field.name %}
