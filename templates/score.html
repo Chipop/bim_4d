@@ -59,6 +59,12 @@ Manage Projects
   <div class="row">
     <div class="col-sm-3">
       <h1 class="bim_title">Projects</h1>
+      {% if info is not none %}
+      <div class="alert alert-success"  role="alert">{{ info }}</div>
+      {% endif %}
+      {% if project_id is none %}
+      <div class="alert alert-warning"  role="alert">Please select project to see details.</div>
+      {% endif %}
       <div class="list-group">
         {% for project in projects %}
         {% if project['id']==project_id %}
@@ -160,11 +166,7 @@ Manage Projects
     </div>
     <div class="col-sm-9">
       {% if project_id is none %}
-      <div class="alert alert-warning"  role="alert">Please select project to see details.</div>
       {% else %}
-      {% if info is not none %}
-      <div class="alert alert-success"  role="alert">{{ info }}</div>
-      {% endif %}
       <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <div class="row">
