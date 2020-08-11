@@ -11,7 +11,7 @@ from flask_babelex import Babel
 from flask_nav import Nav, register_renderer
 from flask_nav.elements import *
 from flask_bootstrap.nav import BootstrapRenderer
-from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS, DATA
+from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS, DATA,All
 from dominate import tags
 import datetime
 import json
@@ -251,7 +251,7 @@ class ScoreForm(FlaskForm):
     cm_restriction1 = SelectField('Sector type', choices=[(
         0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
     cm_restriction2 = SelectField('Site logistics', choices=[(
-        0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
+        0, 'Little or no restriction'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
     cm_restriction3 = SelectField('Project duration', choices=[(
         0, '5 + Years'), (1, '2 - 5 Years'), (2, '0 - 2 Years')], coerce=int)
 
@@ -285,10 +285,6 @@ class ScoreForm(FlaskForm):
     attribute3 = SelectField('Schedule creation/manipulation',
                              choices=[(x, str(x)) for x in range(11)], coerce=int)
 
-    attribute3_before_files = NoValidationSelectMultipleField(
-     'Select files to remove', choices=[], coerce=int)
-    attribute3_files = MultipleFileField(
-     'Time Data and/or Images file upload')
 
 
     attribute4 = SelectField('Risk assessment', choices=[
@@ -298,11 +294,6 @@ class ScoreForm(FlaskForm):
     attribute6 = SelectField('Construction Supply Chain Management(CSCM)', choices=[
                              (x, str(x)) for x in range(1, 11, 1)], coerce=int)
 
-
-    attribute6_before_files = NoValidationSelectMultipleField(
-      'Select files to remove', choices=[], coerce=int)
-    attribute6_files = MultipleFileField(
-      'Cost Data and/or Images file upload')
 
 
     attribute7 = SelectField('Simulation', choices=[(
@@ -316,11 +307,11 @@ class ScoreForm(FlaskForm):
     attribute9_before_files = NoValidationSelectMultipleField(
       'Select files to remove', choices=[], coerce=int)
     attribute9_files = MultipleFileField(
-      'Quality Data and/or Images file upload')
+      'Project Based 4D BIM Attributes and/or Images file upload')
 
     project_before_files = NoValidationSelectMultipleField(
         'Select files to remove', choices=[], coerce=int)
-    project_files = MultipleFileField('Quality Data and/or Images file upload')
+    project_files = MultipleFileField('Project Details Data and/or Images files upload')
 
     def reset(self):
         blank_data = {'csrf': self.csrf_token}
@@ -331,7 +322,7 @@ class RecommendForm(FlaskForm):
     cm_restriction1 = SelectField('Sector type', choices=[(
         0, 'Private'), (1, 'Public Private Partnership (PPP)'), (2, 'Public')], coerce=int)
     cm_restriction2 = SelectField('Site logistics', choices=[(
-        0, 'Slightly restricted'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
+        0, 'Little or no restriction'), (1, 'Restricted'), (2, 'Severely restricted')], coerce=int)
     cm_restriction3 = SelectField('Project duration', choices=[(
         0, '5 + Year'), (1, '2 - 5 Years'), (2, '0 - 2 Years')], coerce=int)
     cm_restriction6 = SelectField('Development use', choices=[(
@@ -492,11 +483,7 @@ def add():
 
 
 images = UploadSet('images', IMAGES)
-files = UploadSet('files', TEXT + DOCUMENTS + DATA + tuple('csv ini json plist xml yaml yml'.split()) +
-                  tuple('step dwf ifc igs iges man cv7 ipt iam ipj jt dgn prp prw x_b dri'.split()) +
-                  tuple('rvm skp stl wrl wrz 3ds prjvwire f3d cam360 ipt prj sab rvt rfa rte'.split()) +
-                  tuple('odbc html gbxm fli flc sp spx pp mpg avi gif bmp png jpg jpeg tif'.split()) +
-                  tuple('mpp sp nwf nwd'.split()))
+files = UploadSet('files', All())
 configure_uploads(app, [images, files])
 
 
@@ -545,9 +532,6 @@ def score(project_id):
         form.project_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.cm_restriction6_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.cm_restriction6_files.render_kw = {'readonly': True, 'disabled': True}
-        form.attribute3_files.render_kw = {'readonly': True, 'disabled': True}
-        form.attribute6_before_files.render_kw = {'readonly': True, 'disabled': True}
-        form.attribute6_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute9_before_files.render_kw = {'readonly': True, 'disabled': True}
         form.attribute9_files.render_kw = {'readonly': True, 'disabled': True}
 
@@ -600,18 +584,6 @@ def score(project_id):
                     len(projects[project_id]['cm_restriction6_files']))]
             except  KeyError:
                 projects[project_id]['cm_restriction6_files'] = []
-
-            try:
-                form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
-                    len(projects[project_id]['attribute3_files']))]
-            except  KeyError:
-                projects[project_id]['attribute3_files'] = []
-
-            try:
-                form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
-                    len(projects[project_id]['attribute6_files']))]
-            except  KeyError:
-                projects[project_id]['attribute6_files'] = []
 
             try:
                 form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
@@ -678,40 +650,6 @@ def score(project_id):
             projects[project_id]['cm_restriction6_files'] = cm_restriction6_files
 
 
-        # project Attributes (Section 1) TIME Files
-        for ind in form.attribute3_before_files .data[::-1]:
-            os.remove(base_dir + '/static/upload/file/' +
-                      projects[project_id]['attribute3_files'][ind])
-            del projects[project_id]['attribute3_files'][ind]
-
-        attribute3_files = []
-
-        for item in request.files.getlist('attribute3_files'):
-            if item:
-                attribute3_files.append(files.save(item))
-
-        try:
-            projects[project_id]['attribute3_files'] += attribute3_files
-        except KeyError:
-            projects[project_id]['attribute3_files'] = attribute3_files
-
-        # project Attributes (Section 3) QUALITY Files
-        for ind in form.attribute6_before_files .data[::-1]:
-            os.remove(base_dir + '/static/upload/file/' +
-                      projects[project_id]['attribute6_files'][ind])
-            del projects[project_id]['attribute6_files'][ind]
-
-        attribute6_files = []
-
-        for item in request.files.getlist('attribute6_files'):
-            if item:
-                attribute3_files.append(files.save(item))
-
-        try:
-            projects[project_id]['attribute6_files'] += attribute6_files
-        except KeyError:
-            projects[project_id]['attribute6_files'] = attribute6_files
-
         # project Attributes (Section 2) COST Files
         for ind in form.attribute9_before_files .data[::-1]:
             os.remove(base_dir + '/static/upload/file/' +
@@ -739,10 +677,6 @@ def score(project_id):
         form.cm_restriction6_before_files.choices = [(x, projects[project_id]['cm_restriction6_files'][x]) for x in range(
             len(projects[project_id]['cm_restriction6_files']))]
 
-        form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
-            len(projects[project_id]['attribute3_files']))]
-        form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
-            len(projects[project_id]['attribute6_files']))]
         form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
             len(projects[project_id]['attribute9_files']))]
 
@@ -760,10 +694,6 @@ def score(project_id):
                                    projects[project_id]['project_files']),
                                files_constraints=None if project_id is None else fix_files_list_images_top(
                                    projects[project_id]['cm_restriction6_files']),
-                               files_attributes_time=None if project_id is None else fix_files_list_images_top(
-                                   projects[project_id]['attribute3_files']),
-                               files_attributes_cost=None if project_id is None else fix_files_list_images_top(
-                                   projects[project_id]['attribute6_files']),
                                files_attributes_quality=None if project_id is None else fix_files_list_images_top(
                                    projects[project_id]['attribute9_files']),
                                project_id=project_id)
@@ -780,10 +710,6 @@ def score(project_id):
                                projects[project_id]['project_files']),
                            files_constraints=None if project_id is None else fix_files_list_images_top(
                                projects[project_id]['cm_restriction6_files']),
-                           files_attributes_time=None if project_id is None else fix_files_list_images_top(
-                               projects[project_id]['attribute3_files']),
-                           files_attributes_cost=None if project_id is None else fix_files_list_images_top(
-                               projects[project_id]['attribute6_files']),
                            files_attributes_quality=None if project_id is None else fix_files_list_images_top(
                                projects[project_id]['attribute9_files']),
                            project_id=project_id)
@@ -928,18 +854,6 @@ def accept(project_id):
                 projects[project_id]['cm_restriction6_files'] = []
 
             try:
-                form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
-                    len(projects[project_id]['attribute3_files']))]
-            except  KeyError:
-                projects[project_id]['attribute3_files'] = []
-
-            try:
-                form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
-                    len(projects[project_id]['attribute6_files']))]
-            except  KeyError:
-                projects[project_id]['attribute6_files'] = []
-
-            try:
                 form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
                     len(projects[project_id]['attribute9_files']))]
             except  KeyError:
@@ -1003,40 +917,6 @@ def accept(project_id):
             projects[project_id]['cm_restriction6_files'] = cm_restriction6_files
 
 
-        # project Attributes (Section 1) TIME Files
-        for ind in form.attribute3_before_files .data[::-1]:
-            os.remove(base_dir + '/static/upload/file/' +
-                      projects[project_id]['attribute3_files'][ind])
-            del projects[project_id]['attribute3_files'][ind]
-
-        attribute3_files = []
-
-        for item in request.files.getlist('attribute3_files'):
-            if item:
-                attribute3_files.append(files.save(item))
-
-        try:
-            projects[project_id]['attribute3_files'] += attribute3_files
-        except KeyError:
-            projects[project_id]['attribute3_files'] = attribute3_files
-
-        # project Attributes (Section 3) QUALITY Files
-        for ind in form.attribute6_before_files .data[::-1]:
-            os.remove(base_dir + '/static/upload/file/' +
-                      projects[project_id]['attribute6_files'][ind])
-            del projects[project_id]['attribute6_files'][ind]
-
-        attribute6_files = []
-
-        for item in request.files.getlist('attribute6_files'):
-            if item:
-                attribute3_files.append(files.save(item))
-
-        try:
-            projects[project_id]['attribute6_files'] += attribute6_files
-        except KeyError:
-            projects[project_id]['attribute6_files'] = attribute6_files
-
         # project Attributes (Section 2) COST Files
         for ind in form.attribute9_before_files .data[::-1]:
             os.remove(base_dir + '/static/upload/file/' +
@@ -1066,10 +946,6 @@ def accept(project_id):
         form.cm_restriction6_before_files.choices = [(x, projects[project_id]['cm_restriction6_files'][x]) for x in range(
             len(projects[project_id]['cm_restriction6_files']))]
 
-        form.attribute3_before_files.choices = [(x, projects[project_id]['attribute3_files'][x]) for x in range(
-            len(projects[project_id]['attribute3_files']))]
-        form.attribute6_before_files.choices = [(x, projects[project_id]['attribute6_files'][x]) for x in range(
-            len(projects[project_id]['attribute6_files']))]
         form.attribute9_before_files.choices = [(x, projects[project_id]['attribute9_files'][x]) for x in range(
             len(projects[project_id]['attribute9_files']))]
 
@@ -1082,10 +958,6 @@ def accept(project_id):
                                    projects[project_id]['project_files']),
                                files_constraints=None if project_id is None else fix_files_list_images_top(
                                    projects[project_id]['cm_restriction6_files']),
-                               files_attributes_time=None if project_id is None else fix_files_list_images_top(
-                                   projects[project_id]['attribute3_files']),
-                               files_attributes_cost=None if project_id is None else fix_files_list_images_top(
-                                   projects[project_id]['attribute6_files']),
                                files_attributes_quality=None if project_id is None else fix_files_list_images_top(
                                    projects[project_id]['attribute9_files']),
                                accepted=True if project_id is None else projects[project_id]['accepted'],
@@ -1102,10 +974,6 @@ def accept(project_id):
                                projects[project_id]['project_files']),
                            files_constraints=None if project_id is None else fix_files_list_images_top(
                                projects[project_id]['cm_restriction6_files']),
-                           files_attributes_time=None if project_id is None else fix_files_list_images_top(
-                               projects[project_id]['attribute3_files']),
-                           files_attributes_cost=None if project_id is None else fix_files_list_images_top(
-                               projects[project_id]['attribute6_files']),
                            files_attributes_quality=None if project_id is None else fix_files_list_images_top(
                                projects[project_id]['attribute9_files']),
                            accepted=True if project_id is None else projects[project_id]['accepted'],
