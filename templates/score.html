@@ -75,9 +75,11 @@ Manage Projects
         {% endfor %}
       </div>
       {% if files is not none %}
-        <h3 class="bim_subtitle">Project Details Data and/or Images</h3>
         <div class="list-group">
           {% for file in files %}
+            {% if loop.index == 1 %}
+              <h3 class="bim_subtitle">Project Details Data and/or Images</h3>
+            {% endif %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
                 <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="Project Image">
                   <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
@@ -94,9 +96,11 @@ Manage Projects
       {% endif %}
 
       {% if files_constraints is not none %}
-        <h3 class="bim_subtitle">Project Constraints Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_constraints %}
+            {% if loop.index == 1 %}
+              <h3 class="bim_subtitle">Project Constraints Data and/or Images</h3>
+            {% endif %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
                 <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
                   <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
@@ -112,46 +116,15 @@ Manage Projects
         </div>
       {% endif %}
 
-      {% if files_attributes_time is not none %}
-        <h3 class="bim_subtitle">Project Based 4D BIM Attributes Data and/or Images</h3>
-        <div class="list-group">
-          {% for file in files_attributes_time %}
-            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
-                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
-                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
-                    <i class="fa   fa-search"></i>
-                </a>
-            {% else %}
-              <div class="">
-                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
-              </div>
-            {% endif %}
-          {% else %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if files_attributes_cost is not none %}
-        <div class="list-group">
-          {% for file in files_attributes_cost %}
-            {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
-                <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
-                  <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project PB4D COST Image">
-                    <i class="fa   fa-search"></i>
-                </a>
-            {% else %}
-              <div class="">
-                <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
-              </div>
-            {% endif %}
-          {% else %}
-          {% endfor %}
-        </div>
-      {% endif %}
 
       {% if files_attributes_quality is not none %}
         <div class="list-group">
           {% for file in files_attributes_quality %}
+
+              {% if loop.index == 1 %}
+                <h3 class="bim_subtitle">Project Based 4D BIM Attributes Data and/or Images</h3>
+              {% endif %}
+
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
                 <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
                   <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project PB4D QUALITY Image">

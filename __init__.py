@@ -297,7 +297,7 @@ class ScoreForm(FlaskForm):
         x, str(x)) for x in range(1, 11, 1)], coerce=int)
 
 
-    
+
     attribute4 = SelectField('Risk assessment', choices=[
                              (x, str(x)) for x in range(11)], coerce=int)
     attribute5 = SelectField('Data analysis', choices=[(
