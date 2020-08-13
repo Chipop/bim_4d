@@ -248,6 +248,7 @@ class ScoreForm(FlaskForm):
     award = StringField('Specific Project defined Award(s) won',
                         render_kw={'readonly': 'true'})
     email = StringField('E-mail', render_kw={'readonly': True})
+
     cm_restriction1 = SelectField('Sector type', choices=[(
         0, 'Private'), (1, 'PPP'), (2, 'Public')], coerce=int)
     cm_restriction2 = SelectField('Site logistics', choices=[(
@@ -287,14 +288,6 @@ class ScoreForm(FlaskForm):
 
 
 
-    attribute4 = SelectField('Risk assessment', choices=[
-                             (x, str(x)) for x in range(11)], coerce=int)
-    attribute5 = SelectField('Data analysis', choices=[(
-        x, str(x)) for x in range(1, 11, 1)], coerce=int)
-    attribute6 = SelectField('Construction Supply Chain Management(CSCM)', choices=[
-                             (x, str(x)) for x in range(1, 11, 1)], coerce=int)
-
-
 
     attribute7 = SelectField('Simulation', choices=[(
         x, str(x)) for x in range(1, 11, 1)], coerce=int)
@@ -304,10 +297,20 @@ class ScoreForm(FlaskForm):
         x, str(x)) for x in range(1, 11, 1)], coerce=int)
 
 
+    
+    attribute4 = SelectField('Risk assessment', choices=[
+                             (x, str(x)) for x in range(11)], coerce=int)
+    attribute5 = SelectField('Data analysis', choices=[(
+        x, str(x)) for x in range(1, 11, 1)], coerce=int)
+    attribute6 = SelectField('Construction Supply Chain Management(CSCM)', choices=[
+                             (x, str(x)) for x in range(1, 11, 1)], coerce=int)
+
+
+
     attribute9_before_files = NoValidationSelectMultipleField(
       'Select files to remove', choices=[], coerce=int)
     attribute9_files = MultipleFileField(
-      'Project Based 4D BIM Attributes and/or Images file upload')
+      'Project Based 4D BIM Attributes Data and/or Images file upload')
 
     project_before_files = NoValidationSelectMultipleField(
         'Select files to remove', choices=[], coerce=int)

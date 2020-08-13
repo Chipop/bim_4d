@@ -24,6 +24,125 @@
 	src: local('Verdana'), url('fonts/verdana.ttf') format('truetype');
 }
 
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 1.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 10.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 11.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 12.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 13.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 14.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 2.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 3.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 4.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 5.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 6.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 7.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 8.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT 9.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Bahnschrift Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Bahnschrift Regular'), url('fonts/BAHNSCHRIFT.woff') format('woff');
+}
+
 #main {
         display: flex;
         justify-content: center;
@@ -51,17 +170,20 @@ li {
 }
 
 .bim_title{
-	font-family: verdana,"helvetica", "sans-serif";
-	font-style: italic;
+	font-family: "Bahnschrift Regular", verdana,"helvetica", "sans-serif";
 	font-weight:bold;
-	font-size: 14pt;
+	font-size: 18pt;
+	text-align:center;
 }
 
 .bim_subtitle{
-	font-family: verdana,"helvetica", "sans-serif";
-	font-style: italic;
+	font-family: "Bahnschrift Regular",verdana,"helvetica", "sans-serif";
 	font-size: 12pt;
 	font-weight:bold;
+}
+
+.bim_font{
+	font-family: "Bahnschrift Regular",verdana,"helvetica", "sans-serif";
 }
 
 

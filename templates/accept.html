@@ -78,7 +78,7 @@ Manage Projects
         {% endfor %}
       </div>
       {% if files is not none %}
-        <h3 style="margin:30px 0 15px 0 ;">Data and/or Images</h3>
+        <h3 class="bim_subtitle">Project Details Data and/or Images</h3>
         <div class="list-group">
           {% for file in files %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -97,6 +97,7 @@ Manage Projects
       {% endif %}
 
       {% if files_constraints is not none %}
+        <h3 class="bim_subtitle">Project Constraints Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_constraints %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -115,6 +116,7 @@ Manage Projects
       {% endif %}
 
       {% if files_attributes_time is not none %}
+        <h3 class="bim_subtitle">Project Based 4D BIM Attributes Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_attributes_time %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}

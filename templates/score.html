@@ -75,6 +75,7 @@ Manage Projects
         {% endfor %}
       </div>
       {% if files is not none %}
+        <h3 class="bim_subtitle">Project Details Data and/or Images</h3>
         <div class="list-group">
           {% for file in files %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -93,6 +94,7 @@ Manage Projects
       {% endif %}
 
       {% if files_constraints is not none %}
+        <h3 class="bim_subtitle">Project Constraints Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_constraints %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -111,6 +113,7 @@ Manage Projects
       {% endif %}
 
       {% if files_attributes_time is not none %}
+        <h3 class="bim_subtitle">Project Based 4D BIM Attributes Data and/or Images</h3>
         <div class="list-group">
           {% for file in files_attributes_time %}
             {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
@@ -188,11 +191,11 @@ Manage Projects
             {% for field in form %}
               {% if field.name == 'cm_restriction1' %}
                   <h2 class="bim_title">Project Constraints</h2>
-                  <h3 class="bim_subtitle" style=" color: darkblue; ">TIME</h3>
+                  <h3 class="bim_subtitle" >TIME</h3>
               {% elif field.name == 'cm_restriction4' %}
-                  <h3  class="bim_subtitle" style=" color: darkblue; ">COST</h3>
+                  <h3  class="bim_subtitle" >COST</h3>
               {% elif field.name == 'cm_restriction7' %}
-                  <h3  class="bim_subtitle" style=" color: darkblue; ">QUALITY</h3>
+                  <h3  class="bim_subtitle">QUALITY</h3>
             {% endif %}
 
               {% if 'cm_restriction' in field.name %}
