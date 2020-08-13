@@ -25,7 +25,7 @@ projects = {}
 software_names = ['Synchro Pro', 'Asta PowerProject', 'Navisworks Manage']
 base_dir = os.path.dirname(__file__)
 
-
+#
 # Class-based application configuration
 class ConfigClass(object):
     """ Flask application config """
