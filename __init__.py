@@ -463,7 +463,7 @@ def add():
         }
         save_projects()
         users = User.query.all()
-        if len([x for x in users if x.email == form.email.data]) == 0:
+        if len([x for x in users if x.email.lower() == form.email.data.lower()]) == 0:
             roles = Role.query.all()
             user = User(
                 email=form.email.data,
