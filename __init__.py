@@ -185,10 +185,12 @@ def save_projects():
 
 
 def compare_list(a, b):
-    if len(a) != len(b):
-        return False
-    length = len(a)
-    return len([i for i in range(length) if a[i] == b[i]]) == length
+    similarities = 0
+    for i in range(len(a)):
+        if a[i] == b[i]:
+            similarities = similarities +1
+    print(similarities)
+    return similarities
 
 
 class NoValidationSelectField(SelectField):
@@ -737,9 +739,14 @@ def recommend():
         }
         # soft_num, soft_score = max_score(software_choice2(project['cm_restrictions'],
         #                                                   [(x['cm_restrictions'], x['application']) for x in projects.values() if x['history']]))
-
-        prjs = [x for x in projects.values() if x['history'] and compare_list(
-            x['cm_restrictions'], project['cm_restrictions'])]
+        prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions'], project['cm_restrictions'])>= 6]
+        print(len(prjs))
+        for proj in projects.values():
+            print("____________________________________________")
+            compare_list(proj['cm_restrictions'], project['cm_restrictions'])
+            print(proj['cm_restrictions'])
+            print(project['cm_restrictions'])
+            print("____________________________________________")
         for prj in prjs:
             prj['aggregate_score'] = sum(prj['attribute_ratings'])
         return render_template('recommend.html',

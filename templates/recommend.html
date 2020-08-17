@@ -34,12 +34,15 @@ Recommendation
         </div>
         <div class="col-sm-6">
             <br>
-            <img class = "thumbnail" src = "{{ url_for('static', filename='img/4dbim.png') }}" style = "width : 100%; margin-top : 60px;"/>
+            <img class = "thumbnail" src = "{{ url_for('static', filename='img/4dbim.png') }}" style = "width : 100%; margin-top : 60px;{% if projects  %}    height: 340px;{%  endif %}"/>
             <div class="list-group">
                 {% if projects is none %}
                     <p>There isn't any recommended projects.</p>
                 {% else %}
                     {% for project in projects %}
+                        {% if loop.index == 1 %}
+                          <h3>Similar projects found ({{ projects|length }})</h3>
+                        {% endif %}
                         <div class="alert alert-success" role="alert">
                             <h3>{{project['title']}}</h3>
                             <h4>{{software_names[project['application']]}} {{software_names[project['version']]}}</h4>
