@@ -736,9 +736,9 @@ def recommend():
                                 form.cm_restriction7.data,
                                 form.cm_restriction8.data,
                                 form.cm_restriction9.data,
-                                form.country,
-                                form.city,
-                                form.local_authority,
+                                form.country.data,
+                                form.city.data,
+                                form.local_authority.data,
                                 ]
         }
         # soft_num, soft_score = max_score(software_choice2(project['cm_restrictions'],
