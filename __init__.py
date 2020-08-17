@@ -185,6 +185,8 @@ def save_projects():
 
 
 def compare_list(a, b):
+    print(a)
+    print(b)
     similarities = 0
     for i in range(len(a)):
         if a[i] == b[i]:
@@ -747,12 +749,6 @@ def recommend():
         # prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city']),x['local_authority']],project['cm_restrictions'])>= 6]
         prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city'],x['local_authority']], project['cm_restrictions'])>= 6]
         print(len(prjs))
-        for proj in projects.values():
-            print("____________________________________________")
-            compare_list(proj['cm_restrictions'], project['cm_restrictions'])
-            print(proj['cm_restrictions'])
-            print(project['cm_restrictions'])
-            print("____________________________________________")
         for prj in prjs:
             prj['aggregate_score'] = sum(prj['attribute_ratings'])
         return render_template('recommend.html',
