@@ -735,11 +735,17 @@ def recommend():
                                 form.cm_restriction6.data,
                                 form.cm_restriction7.data,
                                 form.cm_restriction8.data,
-                                form.cm_restriction9.data]
+                                form.cm_restriction9.data,
+                                form.country,
+                                form.city,
+                                form.local_authority,
+                                ]
         }
         # soft_num, soft_score = max_score(software_choice2(project['cm_restrictions'],
         #                                                   [(x['cm_restrictions'], x['application']) for x in projects.values() if x['history']]))
-        prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions'], project['cm_restrictions'])>= 6]
+
+        # prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city']),x['local_authority']],project['cm_restrictions'])>= 6]
+        prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city'],x['local_authority']], project['cm_restrictions'])>= 6]
         print(len(prjs))
         for proj in projects.values():
             print("____________________________________________")
