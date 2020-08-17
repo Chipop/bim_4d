@@ -747,7 +747,7 @@ def recommend():
         #                                                   [(x['cm_restrictions'], x['application']) for x in projects.values() if x['history']]))
 
         # prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city']),x['local_authority']],project['cm_restrictions'])>= 6]
-        prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city'],x['local_authority']], project['cm_restrictions'])>= 4]
+        prjs = [x for x in projects.values() if x['history'] and compare_list(x['cm_restrictions']+[x['country'],x['city'],x['local_authority']], project['cm_restrictions'])>= 3]
         print(len(prjs))
         for prj in prjs:
             prj['aggregate_score'] = sum(prj['attribute_ratings'])
