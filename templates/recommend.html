@@ -5,11 +5,50 @@
 <meta charset="UTF-8" />
 <meta content="An analytical process has been developed, which incorporates a decision support system (DSS). Used to aid in the decision making process to decide, which 4D BIM software application (synchro, navisworks asta or powerproject) is best suited to a construction project, established from a project specific set of requirements." name="description">
 <meta content="4D BIM, synchro, asta power project & navisworks" name="keywords">
+
 {{ super() }}
 {% endblock %}
 
 {% block title %}
 Recommendation
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('static', filename='vendor/lightbox/js/lightbox.min.js')}}"></script>
+{% endblock %}
+
+
+{%  block styles %}
+<link rel="stylesheet" href="{{url_for('static', filename='vendor/lightbox/css/lightbox.min.css')}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+{{super()}}
+
+
+<style media="screen">
+  .mb--20 {
+    margin-bottom: 20px;
+  }
+
+  .mt--10{
+    margin-top:10px;
+  }
+
+  .image-link-zoom{
+    position:relative;
+  }
+
+  .image-link-zoom i{
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 18px;
+    color: white;
+    background-color: #0000006e;
+    border-radius: 50%;
+    padding: 7px;
+  }
+</style>
 {% endblock %}
 
 {% block navbar %}
@@ -67,14 +106,73 @@ Recommendation
                                     {% endfor %}
                                 </div>
                             {% endif %}
-                            {% if project['files']|length != 0 %}
-                                <h4>Files</h4>
                                 <div class="list-group">
-                                    {% for file in project['files'] %}
-                                        <a class="btn btn-info" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}}</a>
-                                    {% endfor %}
+
+                                    {% if  project['project_files'] is not none %}
+                                      <div class="list-group">
+                                        {% for file in project['project_files'] %}
+                                          {% if loop.index == 1 %}
+                                            <h3 class="bim_subtitle">Project Details Data and/or Images</h3>
+                                          {% endif %}
+                                          {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                                              <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="Project Image">
+                                                <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
+                                                  <i class="fa   fa-search"></i>
+                                              </a>
+                                          {% else %}
+                                            <div class="">
+                                              <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+                                            </div>
+                                          {% endif %}
+                                        {% else %}
+                                        {% endfor %}
+                                      </div>
+                                    {% endif %}
+
+                                    {% if project['cm_restriction6_files'] is not none %}
+                                      <div class="list-group">
+                                        {% for file in project['cm_restriction6_files'] %}
+                                          {% if loop.index == 1 %}
+                                            <h3 class="bim_subtitle">Project Constraints Data and/or Images</h3>
+                                          {% endif %}
+                                          {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                                              <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                                                <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project Image">
+                                                  <i class="fa   fa-search"></i>
+                                              </a>
+                                          {% else %}
+                                            <div class="">
+                                              <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+                                            </div>
+                                          {% endif %}
+                                        {% else %}
+                                        {% endfor %}
+                                      </div>
+                                    {% endif %}
+
+                                    {% if project['attribute9_files'] is not none %}
+                                      <div class="list-group">
+                                        {% for file in  project['attribute9_files'] %}
+
+                                            {% if loop.index == 1 %}
+                                              <h3 class="bim_subtitle">Project Based 4D BIM Attributes Data and/or Images</h3>
+                                            {% endif %}
+
+                                          {% if file.endswith('.png') or  file.endswith('.jpeg') or  file.endswith('.jpg') or  file.endswith('.gif')  %}
+                                              <a class="image-link-zoom" href="{{ url_for('static', filename='upload/file/%s'%file) }}" data-lightbox="Project Image" data-title="">
+                                                <img height=100 width=100 src="{{ url_for('static', filename='upload/file/%s'%file) }}" alt="Project PB4D QUALITY Image">
+                                                  <i class="fa   fa-search"></i>
+                                              </a>
+                                          {% else %}
+                                            <div class="">
+                                              <a download class="btn btn-info mt--10" href="{{ url_for('static', filename='upload/file/%s'%file) }}" class="list-group-item">{{file}} <i class="fas fa-download"></i></a>
+                                            </div>
+                                          {% endif %}
+                                        {% else %}
+                                        {% endfor %}
+                                      </div>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
                         </div>
                     {% endfor %}
                     {% if projects|length != 0 %}
@@ -91,8 +189,4 @@ Recommendation
     </div>
 </div>
 
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
 {% endblock %}
